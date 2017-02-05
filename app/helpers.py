@@ -18,6 +18,7 @@ def run_code(code):
         output, error = p.communicate()
     except subprocess.CalledProcessError as e:
         except_out = e.output
+    os.remove('new_code.py')
     return output
 
 
