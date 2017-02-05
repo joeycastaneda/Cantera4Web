@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import sys, helpers
 from flask import Flask, render_template, request, jsonify
 from cStringIO import StringIO
