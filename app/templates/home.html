@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Cantera for Web </title>
+    <script src="static/js/jquery.js?ver=1"></script>
+    <script src="static/js/execute.js?ver=6"></script>
+    <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/home.css?ver=28">
+</head>
+<body>
+    <h1>Cantera for Web</h1>
+    <p>
+    <strong>Enter Cantera code (in Python) below and press execute.</strong>
+    <pre id="editor1"></pre>
+    <script>
+        var editor = ace.edit("editor1");
+        editor.setTheme("ace/theme/solarized_light");
+        editor.getSession().setMode("ace/mode/python");
+    </script>
+   </p>
+    <button class="button" id="execButton">Execute</button>
+    <h2>Output</h2>
+    <p>
+    <textarea id="output" placeholder="Output appears here" rows="15" ></textarea>
+   </p>
+</body>
+</html>
