@@ -12,6 +12,10 @@ manually download the repo.
 ## Running the Server
 To begin running the server use the following commands in a terminal:
 
+## Setting up local Database
+Follow tutorial to install postrgres app (https://postgresapp.com/)
+  -Must make a databse called postgres
+  -Must install psycopg2 on Virtualenv
 `cd /path/to/Cantera4Web/app/`
 
 `python server.py`
