@@ -11,8 +11,8 @@ manually download the repo.
 
 ## Setting up local Database
 Follow tutorial to install postrgres app (https://postgresapp.com/)
-  -Must make a databse called postgres
-  -Must install psycopg2 on Virtualenv
+* Must make a databse called postgres
+* Must install psycopg2 on Virtualenv
   
 ## Running the Server
 To begin running the server use the following commands in a terminal:
