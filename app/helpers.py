@@ -1,5 +1,7 @@
 import os, sys
 from subprocess import Popen, PIPE, STDOUT
+import matplotlib
+import matplotlib.pyplot as plt
 
 def run_code(code):
     if "subprocess" in code: #so web user can't break stuff
@@ -20,5 +22,4 @@ def run_code(code):
         except_out = e.output
     os.remove('new_code.py')
     return output
-
 
