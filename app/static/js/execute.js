@@ -14,8 +14,9 @@ $(function() {
          if(data.plot == "T"){
              $.get('/tmp/userplt.png')
              .done(function() {  
+                 var d = new Date();
                 var imgContent = document.createElement("IMG");
-                imgContent.setAttribute("src", '/tmp/userplt.png');
+                imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
                 plot_imgDiv.appendChild(imgContent);
          })
          }
