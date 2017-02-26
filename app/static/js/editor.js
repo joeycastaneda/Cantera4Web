@@ -3,4 +3,5 @@ function createEditor(){
     editor.setTheme("ace/theme/crimson_editor");
     editor.setFontSize("13px")
     editor.getSession().setMode("ace/mode/python");
+    editor.setValue("print \"Hello World!\"", 1);
 }
