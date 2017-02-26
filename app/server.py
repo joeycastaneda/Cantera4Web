@@ -25,6 +25,8 @@ def help():
 
 @app.route('/execute')
 def execute():
+    if(os.path.exists("/tmp/userplt.png")):
+        os.remove("/tmp/userplt.png")
     code = request.args.get('code', 0, type=str)
     output = helpers.run_code(code)
     plot = "F"
