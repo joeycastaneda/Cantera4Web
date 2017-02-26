@@ -1,20 +1,31 @@
 #!/usr/bin/python
-import sys, helpers, os.path
+import sys, helpers, os
 from flask import Flask, render_template, request, jsonify, send_file
 from cStringIO import StringIO
 
 app = Flask(__name__)
 
+@app.before_request
+def clean_tmp():
+    files = [f for f in os.listdir("./tmp") if f != ".gitignore"]
+    for f in files:
+        os.remove(os.path.join("./tmp", f))
+
 @app.route('/')
-def hello():
-    return render_template("home.html")
+def editor():
+    return render_template("editor.html")
+
+@app.route('/about')
+def about():
+    return render_template("about.html")
+
+@app.route('/help')
+def help():
+    return render_template("help.html")
 
 @app.route('/execute')
 def execute():
     code = request.args.get('code', 0, type=str)
-    if(os.path.exists("/tmp/userplt.png")):
-        print "Removed"
-        os.remove("/tmp/userplt.png")
     output = helpers.run_code(code)
     plot = "F"
     if(os.path.exists("/tmp/userplt.png")):

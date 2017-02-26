@@ -22,4 +22,3 @@ def run_code(code):
         except_out = e.output
     os.remove('new_code.py')
     return output
-
