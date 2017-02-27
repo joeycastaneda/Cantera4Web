@@ -38,5 +38,23 @@ def execute():
 def get_plot(): 
     return send_file('/tmp/userplt.png', mimetype='image/png')
 
+@app.route('/example')
+def get_example_code():
+    filename = "examples/" + request.args.get('filename', 0, type=str)
+    if(os.path.exists(filename)):
+        code = helpers.read_file(filename)
+        return jsonify(code = code)
+    else:
+        return jsonify(code = "Error: example not found")
+        
+@app.route('/example_img')
+def get_example():
+    filename = "examples/" + request.args.get('filename', 0, type=str)
+    if(os.path.exists(filename)):
+        return send_file(filename, mimetype='image/png')
+    else:
+        return send_file("examples/error.png", mimetype='image/png')
+
+
 if __name__ == '__main__':
     app.run(debug = True)
