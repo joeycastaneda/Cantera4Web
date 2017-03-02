@@ -1,8 +1,11 @@
 import os, sys
 from subprocess import Popen, PIPE, STDOUT
+import matplotlib
+import matplotlib.pyplot as plt
 
 def run_code(code):
-    if "subprocess" in code: #so web user can't break stuff
+    ban = ["subprocess", "os.", ".remove"]
+    if any(x in code for x in ban): #so web user can't break stuff
         return "Stop trying to break my system!"
 
     new_code = ""
@@ -21,4 +24,7 @@ def run_code(code):
     os.remove('new_code.py')
     return output
 
-
+def read_file(path):
+    with open(path, 'r') as example_file:
+        example_code = example_file.read()
+    return example_code

@@ -1,5 +1,8 @@
-import cantera
+import cantera as ct
+import numpy as np
 import matplotlib
-import numpy
+matplotlib.use('Agg')
+import matplotlib.pyplot as plt
 
-
+def plot(userplt):
+    userplt.savefig("/tmp/userplt.png", bbox_inches='tight')

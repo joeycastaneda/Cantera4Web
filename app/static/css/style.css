@@ -1,0 +1,138 @@
+body {
+  background: lightgray;
+  color: #666666;
+  font-family: 'RobotoDraft', 'Roboto', sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+strong {
+    font-weight: bold
+}
+
+p {
+    line-height: 130%;
+}
+
+.p_editor {
+    padding: 0px 5px 10px;
+}
+.p_para {
+    padding: 0px 5px 10px;
+    margin: 0px 7px;
+}
+
+h1 {
+  padding: 10px 5px 20px;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+h2 {
+  padding: 10px 5px 10px;
+  margin: 0px 7px;
+  font-size: 34px;
+  font-weight: 300;
+}
+
+h3 {
+  padding: 10px 5px 15px;
+  margin: 0px 7px;
+  font-size: 26px;
+  font-weight: 300;
+}
+
+
+.button {
+  cursor: pointer;
+  background: #33b5e5;
+  text-align: center;
+  letter-spacing: 1px;
+  width: 10%;
+  border: 0;
+  height: 50px;
+  width: 150px;
+  margin: 7px 7px;
+  font-family: "Roboto";
+  font-size: 26px;
+  color: #ffffff;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  background: #178ab4;
+}
+
+.ace_editor {
+		border: 2px solid #33b5e5;
+		height: 250px;
+		width: 98%;
+        position: relative;
+        left: 6px;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+textarea {
+    outline: none;
+    font-size: 13px;
+    padding: 0px 5px 15px;
+    border: 2px solid #33b5e5;
+    width: 98%;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0px 3px 20px;
+    overflow: hidden;
+    background-color: #33b5e5;
+}
+
+.active {
+    background-color: lightslategray;
+}
+
+li {
+    float: left;
+    border-right: 1px solid white;
+}
+
+li:last-child {
+    border-right: none;
+}
+
+li a {
+    display: block;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+li a:hover {
+    background-color: #178ab4;
+}
+
+code, pre {
+	font-family: Consolas, Monaco, 'Andale Mono', 'Lucida Console', monospace;
+	hyphens: none;
+    font-size: 13px;
+    width: 55%;
+    padding: 0px;
+    margin: 0px;
+    position: relative;
+    left: 7px
+}
+
+.imgdiv{
+    margin: 10px;
+}

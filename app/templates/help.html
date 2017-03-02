@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Cantera for Web </title>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Roboto" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
+    <script src="static/js/jquery.js?ver=3"></script>
+    <script src="static/js/editor.js"></script>
+    <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css?ver=29">
+    <link href="static/css/prism.css" rel="stylesheet" />
+
+</head>
+
+<body>
+    <h1>Cantera for Web</h1>
+    <ul>
+        <li><a href="/">Editor</a></li>
+        <li><a class="active" href="/help">Help</a></li>
+        <li style="float:right"><a href="/about">About</a></li>
+    </ul>
+
+    <h3> Accessing Python modules </h3>
+    <p class="p_para">
+        The Cantera, NumPy, and PyPlot modules have been preimported as 
+        "<strong>ct</strong>", "<strong>np</strong>", and 
+        "<strong>plt</strong>", respectively.<br> The example below shows how to
+         access each module:
+    </p>   
+    <pre><code id="module_access.py" class="language-python"></code></pre>
+    <p class="p_para">
+        More information on each module can be found here: 
+        <a target="_blank" href="http://www.cantera.org/docs/sphinx/html/index.html">Cantera</a>,
+        <a target="_blank" href="https://docs.scipy.org/doc/numpy/reference/">NumPy</a>, 
+        <a target="_blank" href="http://matplotlib.org/api/pyplot_api.html">PyPlot</a>.
+    </p>
+
+    <h3>Plotting</h3>
+    <p class="p_para">
+        Plotting with the editor is just normal usage of the PyPlot module (plt)
+        but with a catch: "<strong>plot(plt)</strong>" must be called in order 
+        for the plot to show on the webpage:
+    </p>
+    <pre><code id="sin_plot.py" class="language-python"></code></pre>
+    <p class="p_para">
+        The above script results in the following plot being displayed:
+    </p>
+    <div class="imgdiv"> <img src="/example_img?filename=sin_plot.png"> </div>
+   <script src="static/js/examples.js?ver=15"></script>
+   <script src="static/js/prism.js"></script>
+</body>
+</html>
