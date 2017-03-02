@@ -1,6 +1,4 @@
 #!/usr/bin/python
-
-import sys, helpers, os
 import sys, helpers, os
 from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file
 from cStringIO import StringIO
@@ -9,8 +7,8 @@ from sqlalchemy import create_engine
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///postgres'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -26,7 +24,7 @@ class User(db.Model):
 
     #registered_on = db.Column('registered_on', db.DateTime)
 
-    def __init__(self, username, password, email):
+    def __init__(self, username, password, email, save):
         self.username = username
         self.password = password
         self.email = email
@@ -109,7 +107,7 @@ def restore():
 def register():
     if request.method == 'GET':
         return render_template('register.html')
-    user = User(request.form['username'], request.form['password'], request.form['email'])
+    user = User(request.form['username'], request.form['password'], request.form['email'], "")
     db.session.add(user)
     db.session.commit()
     flash('User successfully registered')

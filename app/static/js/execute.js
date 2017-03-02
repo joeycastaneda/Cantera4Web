@@ -45,7 +45,7 @@ $(function() {
 
      }, function(data) {
             var editor = ace.edit("editor1");
-            var text = editor.setValue(data.script);
+            var text = editor.setValue(data.script, 1);
         });
         return false;
      });
