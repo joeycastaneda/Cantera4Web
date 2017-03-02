@@ -8,7 +8,6 @@ from flask_login import login_user , logout_user , current_user , login_required
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///postgres'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -50,8 +49,6 @@ db.create_all()
 db.session.commit()
 
 engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
-#engine = create_engine('postgresql:///postgres')
-
 
 @app.before_request
 def clean_tmp():
@@ -84,9 +81,7 @@ def execute():
 
 @app.route('/save')
 def save():
-    print current_user.username
     code = request.args.get('code', 0, type=str)
-    print code
     current = current_user.username
     save_data = User.query.filter_by(username=current).first()
     save_data.save = code
@@ -100,7 +95,6 @@ def restore():
     result = conn.execute("select save from users where username = '%s';" %current)
     for row in result:
         script = row['save']
-    print script
     return jsonify(script=script)
 
 @app.route('/register', methods=['GET', 'POST'])
