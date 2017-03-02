@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Cantera for Web</title>
-
+  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
 
   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
@@ -11,11 +11,11 @@
 
       <link rel="stylesheet" href="static/css/style.css">
 
-
+  
 </head>
 
 <body>
-
+  
 <!-- Form Mixin-->
 <!-- Input Mixin-->
 <!-- Button Mixin-->
@@ -23,40 +23,33 @@
 <div class="pen-title">
   <h1>Welcome to Cantera for Web</h1>
 </div>
+<!-- Form Module-->
 <div class="module form-module">
   <div class="toggle">
   </div>
-<form action="" method=post class="form">
-    <h2>Create an Account </h2>
-
-      <div class="control-group">
+   <form action="" method=post class="form">
+    <h2>Sign in to Your Account </h2>
+    <div class="control-group">
         <div class="controls">
           <input type="text" id="username" name="username" class="input-xlarge"
-            placeholder="Enter Username" value="{{ request.form.username }}"
-            required>
+            placeholder="Enter Username" required>
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
           <input type="password" id="password" name="password" class="input-xlarge"
-            placeholder="Enter Password" value="{{ request.form.password }}"
-            required>
+            placeholder="Enter Password" required>
         </div>
     </div>
 
     <div class="control-group">
         <div class="controls">
-          <input type="email" id="email" name="email" class="input-xlarge"
-            placeholder="Enter Email" value="{{ request.form.username }}"
-            required>
+          <button type="submit" class="btn btn-success">Sign in</button>
         </div>
     </div>
-
-    <div class="control-group">
-        <div class="controls">
-          <button type="submit" class="btn btn-success">Sign up</button>
-        </div>
-    </div>  </div>
+      <a href="{{ url_for('register') }}">Register</a>
+    </form>
+  </div>
 </body>
 </html>

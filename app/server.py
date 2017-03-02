@@ -5,10 +5,12 @@ import sys, helpers, os
 from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file
 from cStringIO import StringIO
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import create_engine
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///postgres'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -20,12 +22,15 @@ class User(db.Model):
     username = db.Column('username', db.String(20), unique=True, index=True)
     password = db.Column('password', db.String(10))
     email = db.Column('email', db.String(50), unique=True, index=True)
+    save = db.Column('save', db.String(50000))
+
     #registered_on = db.Column('registered_on', db.DateTime)
 
     def __init__(self, username, password, email):
         self.username = username
         self.password = password
         self.email = email
+        self.save
         #self.registered_on = datetime.utcnow()
 
     #def is_authenticated(self):
@@ -47,6 +52,7 @@ db.create_all()
 db.session.commit()
 
 engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
+#engine = create_engine('postgresql:///postgres')
 
 
 @app.before_request
@@ -56,7 +62,7 @@ def clean_tmp():
         os.remove(os.path.join("./tmp", f))
 
 @app.route('/editor')
-def hello():
+def editor():
     return render_template("editor.html")
 
 @app.route('/about')
@@ -113,7 +119,7 @@ def register():
 @app.route('/',methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('login.html')
+        return render_template('index.html')
     username = request.form['username']
     password = request.form['password']
     registered_user = User.query.filter_by(username=username,password=password).first()
@@ -122,7 +128,7 @@ def login():
         return redirect(url_for('login'))
     login_user(registered_user)
     flash('Logged in successfully')
-    return redirect(request.args.get('next') or url_for('home'))
+    return redirect(request.args.get('next') or url_for('editor'))
 
 @app.route('/logout')
 def logout():

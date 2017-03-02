@@ -27,3 +27,26 @@ $(function() {
 
 });
 
+$(function() {
+    $('button#saveButton').on("click", function() {
+        var editor = ace.edit("editor1");
+        var text = editor.getValue();
+        $.getJSON('/save', {
+         code: text
+     }, function(data) {
+        });
+        return false;
+     });
+});
+
+$(function() {
+    $('button#restoreButton').on("click", function() {
+        $.getJSON('/restore', {
+
+     }, function(data) {
+            var editor = ace.edit("editor1");
+            var text = editor.setValue(data.script);
+        });
+        return false;
+     });
+});
