@@ -46,6 +46,9 @@ class User(db.Model):
 db.create_all()
 db.session.commit()
 
+engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
+
+
 @app.before_request
 def clean_tmp():
     files = [f for f in os.listdir("./tmp") if f != ".gitignore"]
@@ -74,6 +77,27 @@ def execute():
     if(os.path.exists("/tmp/userplt.png")):
         plot = "T"
     return jsonify(output = output, plot = plot)
+
+@app.route('/save')
+def save():
+    print current_user.username
+    code = request.args.get('code', 0, type=str)
+    print code
+    current = current_user.username
+    save_data = User.query.filter_by(username=current).first()
+    save_data.save = code
+    db.session.commit()
+    return (''), 204
+
+@app.route('/restore')
+def restore():
+    current = current_user.username
+    conn = engine.connect()
+    result = conn.execute("select save from users where username = '%s';" %current)
+    for row in result:
+        script = row['save']
+    print script
+    return jsonify(script=script)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
