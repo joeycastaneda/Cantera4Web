@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys, helpers, os
-from flask import Flask, render_template, request, jsonify, send_file
+from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file
 from cStringIO import StringIO
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ def clean_tmp():
         os.remove(os.path.join("./tmp", f))
 
 @app.route('/')
-def editor():
+def hello():
     return render_template("editor.html")
 
 @app.route('/about')
@@ -56,5 +56,6 @@ def get_example():
         return send_file("examples/error.png", mimetype='image/png')
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':\
+    app.secret_key = 'Thisissecret'
     app.run(debug = True)
