@@ -9,7 +9,7 @@
   <link rel='stylesheet prefetch' href='http://fonts.googleapis.com/css?family=Roboto:400,100,300,500,700,900|RobotoDraft:400,100,300,500,700,900'>
 <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
 
-      <link rel="stylesheet" href="static/css/style.css">
+      <link rel="stylesheet" href="static/css/style_home.css">
 
   
 </head>
@@ -48,7 +48,10 @@
           <button type="submit" class="btn btn-success">Sign in</button>
         </div>
     </div>
-      <a href="{{ url_for('register') }}">Register</a>
+    <div><br>
+    <h2>Not registered yet?</h2>
+      <input type="button" class="button register" onclick="location.href='/register';" value="Register" />
+    </div>
     </form>
   </div>
 </body>
