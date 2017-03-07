@@ -166,6 +166,6 @@ def get_example():
         return send_file("examples/error.png", mimetype='image/png')
 
 
+app.secret_key = 'Thisissecret'
 if __name__ == '__main__':
-    app.secret_key = 'Thisissecret'
     app.run(debug = True)
