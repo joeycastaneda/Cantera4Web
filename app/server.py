@@ -56,7 +56,7 @@ def clean_tmp():
     for f in files:
         os.remove(os.path.join("./tmp", f))
 
-@app.route('/')
+@app.route('/',methods=['GET','POST'])
 def editor():
     if current_user.is_authenticated:
         return render_template("user/editor.html")
@@ -77,7 +77,7 @@ def help():
     else:
         return render_template("anon/help.html")
 
-@app.route('/execute')
+@app.route('/execute',methods=['GET','POST'])
 def execute():
     if(os.path.exists("/tmp/userplt.png")):
         os.remove("/tmp/userplt.png")

@@ -1,4 +1,3 @@
-
 $(function() {
     $('button#execButton').on("click", function() {
         var editor = ace.edit("editor1");
@@ -53,19 +52,21 @@ $(function() {
 
 $(function() {
     $('button#importButton').on("click", function() {
-        var x = document.getElementById("file");
+        var x = document.getElementById("fileImport");
         var editor = ace.edit("editor1");
-        editor.setValue("sdf", 1);
-        if('files' in x){
+        var blah = editor.setValue('sdf', 1);
+    /*    if('files' in x){
             if(x.files.length > 0){
                 var filename = x.files[0].name;
                 var re = /(?:\.([^.]+))?$/;
-                if(re.exec(filename) == 'py' || re.exec(filename) == 'txt'){
+                var ext = re.exec(filename)[1];
+                if(ext === 'py' || ext === 'txt'){
                   ace.edit.("editor1").setValue(filename, 1);
                 }
             }
-        }
+      */
 
-      return false;
+        return false;
      });
 });
+
