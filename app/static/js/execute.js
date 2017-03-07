@@ -50,3 +50,22 @@ $(function() {
         return false;
      });
 });
+
+$(function() {
+    $('button#importButton').on("click", function() {
+        var x = document.getElementById("file");
+        var editor = ace.edit("editor1");
+        editor.setValue("sdf", 1);
+        if('files' in x){
+            if(x.files.length > 0){
+                var filename = x.files[0].name;
+                var re = /(?:\.([^.]+))?$/;
+                if(re.exec(filename) == 'py' || re.exec(filename) == 'txt'){
+                  ace.edit.("editor1").setValue(filename, 1);
+                }
+            }
+        }
+
+      return false;
+     });
+});

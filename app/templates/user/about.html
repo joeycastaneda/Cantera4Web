@@ -8,7 +8,6 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
     <script src="static/js/jquery.js?ver=3"></script>
     <script src="static/js/execute.js?ver=15"></script>
-    <script src="static/js/editor.js"></script>
     <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="static/css/style_home.css?ver=29">
     
@@ -16,24 +15,20 @@
 <body>
     <h1>Cantera for Web</h1>
     <ul>
-        <li><a class="active" href="/editor">Editor</a></li>
+        <li><a href="/">Editor</a></li>
         <li><a href="/help">Help</a></li>
-        <li style="float:right"><a href="/about">About</a></li>
+        <li ><a href="/about">About</a></li>
+        <li style="float:right"> <a href="/logout">Log Out</a> </li>
     </ul>
+   <h2> About </h2>
+   <p class="p_para"> Cantera for Web is a web-based Python interpreter that provides easy access
+       to the open-source software
+       <a target="_blank" href="http://www.cantera.org/docs/sphinx/html/index.html">Cantera</a>,
+        which can be used to model thermodynamics, chemical kinetics, and transport processes. 
+        <a target="_blank" href="https://docs.scipy.org/doc/numpy/reference/">NumPy</a>
+          and <a target="_blank" href="http://matplotlib.org/api/pyplot_api.html">PyPlot</a> are also accesible and can
+          be used in tandem with Cantera.
+   </p>
 
-    <p class = "p_editor">
-    <strong>Enter Cantera code (in Python) below and press Execute.</strong> 
-    <pre id="editor1"></pre>
-    <script> createEditor(); </script>
-   </p>
-   
-    <button class="button" id="execButton">Execute</button>
-    <button class="button" id="saveButton">Save</button>
-    <button class="button" id="restoreButton">Restore</button>
-    <h2>Output</h2>
-    <p class="p_editor">
-    <textarea id="output" placeholder="Output appears here" rows="15" ></textarea>
-   </p>
-   <div class="imgdiv" id="plot_img"> </div>
 </body>
 </html>

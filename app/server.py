@@ -30,8 +30,8 @@ class User(db.Model):
         self.save
         #self.registered_on = datetime.utcnow()
 
-    #def is_authenticated(self):
-     #   return True
+    def is_authenticated(self):
+        return True
 
     def is_active(self):
         return True
@@ -56,17 +56,26 @@ def clean_tmp():
     for f in files:
         os.remove(os.path.join("./tmp", f))
 
-@app.route('/editor')
+@app.route('/')
 def editor():
-    return render_template("editor.html")
+    if current_user.is_authenticated:
+        return render_template("user/editor.html")
+    else:
+        return render_template("anon/editor.html")
 
 @app.route('/about')
 def about():
-    return render_template("about.html")
+    if current_user.is_authenticated:
+        return render_template("user/about.html")
+    else:
+        return render_template("anon/about.html")
 
 @app.route('/help')
 def help():
-    return render_template("help.html")
+    if current_user.is_authenticated:
+        return render_template("user/help.html")
+    else:
+        return render_template("anon/help.html")
 
 @app.route('/execute')
 def execute():
@@ -108,10 +117,10 @@ def register():
     return redirect(url_for('login'))
 
 
-@app.route('/',methods=['GET','POST'])
+@app.route('/login',methods=['GET','POST'])
 def login():
     if request.method == 'GET':
-        return render_template('index.html')
+        return render_template('login.html')
     username = request.form['username']
     password = request.form['password']
     registered_user = User.query.filter_by(username=username,password=password).first()
@@ -125,7 +134,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('/login'))
+    return redirect(url_for('editor'))
 
 @app.before_request
 def before_request():
