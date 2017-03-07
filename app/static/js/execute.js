@@ -50,23 +50,22 @@ $(function() {
      });
 });
 
+
 $(function() {
     $('button#importButton').on("click", function() {
         var x = document.getElementById("fileImport");
         var editor = ace.edit("editor1");
-        var blah = editor.setValue('sdf', 1);
-    /*    if('files' in x){
-            if(x.files.length > 0){
-                var filename = x.files[0].name;
-                var re = /(?:\.([^.]+))?$/;
-                var ext = re.exec(filename)[1];
-                if(ext === 'py' || ext === 'txt'){
-                  ace.edit.("editor1").setValue(filename, 1);
-                }
-            }
-      */
-
+        var filename = x.files[0].name;
+        var file = x.files[0];
+        var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+        if(ext === 'py' || ext === 'txt'){
+            var reader = new FileReader();
+            reader.onload = function(event){
+                var contents = event.target.result;
+                editor.setValue(contents, 1);
+        };
+        reader.readAsText(file);
+        }
         return false;
      });
 });
-
