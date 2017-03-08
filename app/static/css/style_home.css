@@ -81,10 +81,20 @@ button:hover {
         left: 6px;
 }
 
+.container{ width:100%; }
+.align-left{ float: left;width:70%; }
+.align-right{float: right;width:30%}
+
 a {
     text-decoration: none;
 }
 
+a.button {
+    display: inline-block;
+    width: 100px;
+    height: 27px;
+    font-size: 18px;
+ }
 
 textarea {
     outline: none;
@@ -143,7 +153,11 @@ code, pre {
 .imgdiv{
     margin: 10px;
 }
+.lang{
+    margin: 10px  5px 0px;
+}
 
+/*LOGIN PAGE SPECIFIC*/
 /* Pen Title */
 .pen-title {
   padding: 50px 0;

@@ -1,10 +1,11 @@
-
 $(function() {
     $('button#execButton').on("click", function() {
         var editor = ace.edit("editor1");
         var text = editor.getValue();
+        var lang = $("#langSelect>option:selected").html()
         $.getJSON('/execute', {
-         code: text
+         code: text,
+         lang: lang
      }, function(data) {
          $('textarea#output').val(data.output);
          var plot_imgDiv = document.getElementById("plot_img");
@@ -50,6 +51,38 @@ $(function() {
         return false;
      });
 });
+
+$(function() {
+    $('button#importButton').on("click", function() {
+        var x = document.getElementById("fileImport");
+        var editor = ace.edit("editor1");
+        var filename = x.files[0].name;
+        var file = x.files[0];
+        var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
+        if(ext === 'py' || ext === 'txt'){
+            var reader = new FileReader();
+            reader.onload = function(event){
+                var contents = event.target.result;
+                editor.setValue(contents, 1);
+        };
+        reader.readAsText(file);
+        }
+        return false;
+     });
+});
+
+$(function() {
+    $('select#langSelect').change(function(){
+        var editor = ace.edit("editor1");
+        var lang = $("#langSelect>option:selected").html()
+        if(lang == "Python"){
+            editor.getSession().setMode("ace/mode/python");
+        }
+        else{
+            editor.getSession().setMode("ace/mode/c_cpp");
+        }
+    })
+ });
 
 timeout_id = null;
 $(function() {
