@@ -64,11 +64,11 @@ def execute():
 @app.route('/save')
 def save():
     code = request.args.get('code', 0, type=str)
-    current = current_user.username
-    user = User.query.filter_by(username=current).first()
-    print current
-    user.save = code
-    db.session.commit()
+    if current_user.is_authenticated:
+        current = current_user.username
+        user = User.query.filter_by(username=current).first()
+        user.save = code
+        db.session.commit()
     return (''), 204
 
 @app.route('/restore')
