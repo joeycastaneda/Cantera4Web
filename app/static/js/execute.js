@@ -52,7 +52,6 @@ $(function() {
      });
 });
 
-
 $(function() {
     $('button#importButton').on("click", function() {
         var x = document.getElementById("fileImport");
@@ -84,3 +83,22 @@ $(function() {
         }
     })
  });
+
+timeout_id = null;
+$(function() {
+    $(document).keypress(function() {
+        if (timeout_id) {
+            timeout_id = clearTimeout(timeout_id);
+        }
+        timeout_id=setTimeout(function(){
+            console.log("autosaving...");
+            var editor = ace.edit("editor1");
+            var text = editor.getValue();
+            $.getJSON('/save', {
+            code: text
+            }, function(data) {
+            });
+            return false;
+            },750);
+     });
+});
