@@ -47,7 +47,7 @@ $(function() {
         var filename = x.files[0].name;
         var file = x.files[0];
         var ext = filename.slice((filename.lastIndexOf(".") - 1 >>> 0) + 2);
-        if(ext === 'py' || ext === 'txt'){
+        if(ext === 'py' || ext === 'txt' || ext === "cpp" || ext === "c"){
             var reader = new FileReader();
             reader.onload = function(event){
                 var contents = event.target.result;
