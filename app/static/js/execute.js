@@ -2,8 +2,10 @@ $(function() {
     $('button#execButton').on("click", function() {
         var editor = ace.edit("editor1");
         var text = editor.getValue();
+        var lang = $("#langSelect>option:selected").html()
         $.getJSON('/execute', {
-         code: text
+         code: text,
+         lang: lang
      }, function(data) {
          $('textarea#output').val(data.output);
          var plot_imgDiv = document.getElementById("plot_img");
@@ -69,3 +71,16 @@ $(function() {
         return false;
      });
 });
+
+$(function() {
+    $('select#langSelect').change(function(){
+        var editor = ace.edit("editor1");
+        var lang = $("#langSelect>option:selected").html()
+        if(lang == "Python"){
+            editor.getSession().setMode("ace/mode/python");
+        }
+        else{
+            editor.getSession().setMode("ace/mode/c_cpp");
+        }
+    })
+ });

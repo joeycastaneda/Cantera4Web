@@ -1,4 +1,4 @@
-import os, sys
+import os, sys, subprocess
 from subprocess import Popen, PIPE, STDOUT
 import matplotlib
 import matplotlib.pyplot as plt
@@ -6,10 +6,10 @@ import matplotlib.pyplot as plt
 def run_code(code):
     ban = ["subprocess", "os.", ".remove"]
     if any(x in code for x in ban): #so web user can't break stuff
-        return "Stop trying to break my system!"
+        return "Error"
 
     new_code = ""
-    with open('exec_template.py', 'r') as template_file:
+    with open('exec/exec_template.py', 'r') as template_file:
         new_code = template_file.read()
     template_file.close()
     new_code += code
@@ -23,6 +23,31 @@ def run_code(code):
         except_out = e.output
     os.remove('new_code.py')
     return output
+
+def run_CPP(code):
+    new_code = ""
+    with open('exec/exec_template.cpp', 'r') as template_file:
+        new_code = template_file.readlines()
+    template_file.close()
+    new_code.insert(7,code)
+    with open('exec/new_code.cpp', 'w') as exec_file:
+        exec_file.writelines(new_code)
+    exec_file.close()
+    try:
+        make = Popen(["make", "-C", "exec"], stdout=PIPE, stderr=PIPE)
+        makeOutput,makeError = make.communicate()
+        if(makeError == ""):
+            p = Popen(["exec/new_code"], stdout=PIPE, stderr=STDOUT)
+            output, error = p.communicate()
+            make = Popen(["make", "-C", "exec", "clean"], stdout=PIPE, stderr=STDOUT)
+            os.remove('exec/new_code.cpp')
+            return output
+        else:
+            output, error = makeOutput, makeError
+            return makeError
+    except subprocess.CalledProcessError as e:
+        except_out = e.output
+        return except_out
 
 def read_file(path):
     with open(path, 'r') as example_file:

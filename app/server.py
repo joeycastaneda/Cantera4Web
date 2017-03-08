@@ -1,7 +1,7 @@
 #!/usr/bin/python
 import sys, helpers, os
 from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file
-from cStringIO import StringIO
+from User import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
@@ -12,43 +12,10 @@ db = SQLAlchemy(app)
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-
-class User(db.Model):
-    __tablename__ = "users"
-    id = db.Column('user_id', db.Integer, primary_key=True)
-    username = db.Column('username', db.String(20), unique=True, index=True)
-    password = db.Column('password', db.String(10))
-    email = db.Column('email', db.String(50), unique=True, index=True)
-    save = db.Column('save', db.String(50000))
-
-    #registered_on = db.Column('registered_on', db.DateTime)
-
-    def __init__(self, username, password, email, save):
-        self.username = username
-        self.password = password
-        self.email = email
-        self.save
-        #self.registered_on = datetime.utcnow()
-
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return unicode(self.id)
-
-    def __repr__(self):
-        return '<User %r>' % (self.username)
-
 db.create_all()
 db.session.commit()
-
 engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
+app.secret_key = 'Thisissecret'
 
 @app.before_request
 def clean_tmp():
@@ -81,11 +48,17 @@ def help():
 def execute():
     if(os.path.exists("/tmp/userplt.png")):
         os.remove("/tmp/userplt.png")
-    code = request.args.get('code', 0, type=str)
-    output = helpers.run_code(code)
+    lang = request.args.get('lang', 0, type=str)
     plot = "F"
-    if(os.path.exists("/tmp/userplt.png")):
-        plot = "T"
+    output=""
+    if lang == "Python":
+        code = request.args.get('code', 0, type=str)
+        output = helpers.run_code(code)
+        if(os.path.exists("/tmp/userplt.png")):
+            plot = "T"
+    else:
+        code = request.args.get('code', 0, type=str)
+        output = helpers.run_CPP(code)
     return jsonify(output = output, plot = plot)
 
 @app.route('/save')
@@ -166,6 +139,5 @@ def get_example():
         return send_file("examples/error.png", mimetype='image/png')
 
 
-app.secret_key = 'Thisissecret'
 if __name__ == '__main__':
     app.run(debug = True)

@@ -24,10 +24,14 @@
     </ul>
 
     <p class = "p_editor">
-    <strong>Enter Cantera code (in Python) below and press Execute.</strong> 
+    <strong>Enter Cantera code (in Python or C++) below and press Execute.</strong><br>
+    <select class="lang" id="langSelect">
+      <option value="Python">Python</option>
+      <option value="C++">C++</option>
+    </select>
     <pre id="editor1"></pre>
     <script> createEditor(); </script>
-   </p>
+    </p>
    
     <button class="button" id="execButton">Execute</button>
     <button class="button" id="saveButton">Save</button>

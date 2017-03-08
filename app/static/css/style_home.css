@@ -153,7 +153,11 @@ code, pre {
 .imgdiv{
     margin: 10px;
 }
+.lang{
+    margin: 10px  5px 0px;
+}
 
+/*LOGIN PAGE SPECIFIC*/
 /* Pen Title */
 .pen-title {
   padding: 50px 0;
