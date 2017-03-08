@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 
 app = Flask(__name__)
+app.secret_key = 'Thisissecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
 db = SQLAlchemy(app)
 login_manager = LoginManager()
@@ -15,7 +16,6 @@ login_manager.login_view = 'login'
 db.create_all()
 db.session.commit()
 engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
-app.secret_key = 'Thisissecret'
 
 @app.before_request
 def clean_tmp():
@@ -65,18 +65,16 @@ def execute():
 def save():
     code = request.args.get('code', 0, type=str)
     current = current_user.username
-    save_data = User.query.filter_by(username=current).first()
-    save_data.save = code
+    user = User.query.filter_by(username=current).first()
+    print current
+    user.save = code
     db.session.commit()
     return (''), 204
 
 @app.route('/restore')
 def restore():
     current = current_user.username
-    conn = engine.connect()
-    result = conn.execute("select save from users where username = '%s';" %current)
-    for row in result:
-        script = row['save']
+    script = User.query.filter_by(username=current).first().save
     return jsonify(script=script)
 
 @app.route('/register', methods=['GET', 'POST'])

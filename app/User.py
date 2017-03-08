@@ -16,7 +16,7 @@ class User(db.Model):
         self.username = username
         self.password = password
         self.email = email
-        self.save
+        self.save = save
 
     def is_authenticated(self):
         return True

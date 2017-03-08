@@ -44,6 +44,7 @@ def run_CPP(code):
             return output
         else:
             output, error = makeOutput, makeError
+            os.remove('exec/new_code.cpp')
             return makeError
     except subprocess.CalledProcessError as e:
         except_out = e.output
