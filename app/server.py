@@ -4,18 +4,21 @@ from flask import Flask, render_template, request, jsonify, session, flash, url_
 from User import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 
 app = Flask(__name__)
 app.secret_key = 'Thisissecret'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+engine = db.engine
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-db.create_all()
-db.session.commit()
-engine = create_engine('postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres')
+#db.create_all()
+#db.session.commit()
+
 
 @app.before_request
 def clean_tmp():
@@ -66,9 +69,9 @@ def save():
     code = request.args.get('code', 0, type=str)
     if current_user.is_authenticated:
         current = current_user.username
-        user = User.query.filter_by(username=current).first()
-        user.save = code
-        db.session.commit()
+        conn = engine.connect()
+        conn.execute("UPDATE users set save=\'{0}\' where username=\'{1}\'".format(code, current))
+        conn.close()
     return (''), 204
 
 @app.route('/restore')
