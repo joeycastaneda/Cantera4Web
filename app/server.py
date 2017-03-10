@@ -1,11 +1,12 @@
 #!/usr/bin/python
 import sys, helpers, os
-from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file
+from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file, Response
 from User import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
+
 
 app = Flask(__name__)
 app.secret_key = 'Thisissecret'
@@ -16,18 +17,13 @@ engine = db.engine
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
-#db.create_all()
-#db.session.commit()
-
-
-@app.before_request
-def clean_tmp():
-    files = [f for f in os.listdir("./tmp") if f != ".gitignore"]
-    for f in files:
-        os.remove(os.path.join("./tmp", f))
 
 @app.route('/',methods=['GET','POST'])
 def editor():
+    helpers.clean_tmp()
+    with open('tmp/output.txt', 'w') as output_file:
+        output_file.write("")
+        output_file.close()
     if current_user.is_authenticated:
         return render_template("user/editor.html")
     else:
@@ -62,6 +58,9 @@ def execute():
     else:
         code = request.args.get('code', 0, type=str)
         output = helpers.run_CPP(code)
+    with open('tmp/output.txt', 'w') as output_file:
+        output_file.write(str(output))
+        output_file.close()
     return jsonify(output = output, plot = plot)
 
 @app.route('/save')
@@ -139,6 +138,18 @@ def get_example():
     else:
         return send_file("examples/error.png", mimetype='image/png')
 
+@app.route('/makeoutput')
+def make_output():
+    output = request.args.get('output', 0, type=str)
+    print str(output)
+    with open('tmp/output.txt', 'w') as output_file:
+        output_file.write(str(output))
+        output_file.close()
+    return (''), 200
+
+@app.route('/output')
+def get_output():
+    return send_file("tmp/output.txt", mimetype='text/plain')
 
 if __name__ == '__main__':
     app.run(debug = True)

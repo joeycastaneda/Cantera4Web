@@ -54,3 +54,8 @@ def read_file(path):
     with open(path, 'r') as example_file:
         example_code = example_file.read()
     return example_code
+
+def clean_tmp():
+    files = [f for f in os.listdir("./tmp") if f != ".gitignore"]
+    for f in files:
+        os.remove(os.path.join("./tmp", f))

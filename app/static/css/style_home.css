@@ -157,6 +157,14 @@ code, pre {
     margin: 10px  5px 0px;
 }
 
+button a {
+    color: #FFFFFF;
+    font-size: 22px;
+    height: 30px;
+    width: 300px;
+}
+
+
 /*LOGIN PAGE SPECIFIC*/
 /* Pen Title */
 .pen-title {

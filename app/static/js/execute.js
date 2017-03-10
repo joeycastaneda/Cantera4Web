@@ -90,3 +90,15 @@ $(function() {
             },750);
      });
 });
+
+$(function() {
+    $("#output").change(function() {
+        console.log("saving output...");
+        var output = $('#output').val();
+       $.getJSON('/makeoutput', {
+            output: output
+            }, function(data) {
+            });
+        return false;
+    });
+ });
