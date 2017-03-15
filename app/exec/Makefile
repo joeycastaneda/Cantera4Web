@@ -7,7 +7,7 @@ CCFLAGS=-g -std=c++11
 LDLIBS=$(CANTERA_LIBS)
 
 all: 
-	$(CXX) $(CCFLAGS) -o new_code new_code.cpp $(LDLIBS)
+	$(CXX) $(CCFLAGS) new_code.cpp $(LDLIBS) -o new_code
 	
 clean:
 	$(RM) new_code

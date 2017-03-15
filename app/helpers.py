@@ -36,16 +36,20 @@ def run_CPP(code):
     try:
         make = Popen(["make", "-C", "exec"], stdout=PIPE, stderr=PIPE)
         makeOutput,makeError = make.communicate()
-        if(makeError == ""):
+        badStr = """/usr/lib/libcantera.a(ct2ctml.os): In function `Cantera::call_ctml_writer(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, bool)':
+(.text+0x255c): warning: the use of `tmpnam' is dangerous, better use `mkstemp'\n"""
+        fixedMakeError = makeError.replace(badStr, "")
+        if(fixedMakeError == ""):
             p = Popen(["exec/new_code"], stdout=PIPE, stderr=STDOUT)
             output, error = p.communicate()
             make = Popen(["make", "-C", "exec", "clean"], stdout=PIPE, stderr=STDOUT)
             os.remove('exec/new_code.cpp')
             return output
         else:
+            #print makeError
             output, error = makeOutput, makeError
             os.remove('exec/new_code.cpp')
-            return makeError
+            return fixedMakeError
     except subprocess.CalledProcessError as e:
         except_out = e.output
         return except_out
