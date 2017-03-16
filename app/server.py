@@ -36,6 +36,13 @@ def about():
     else:
         return render_template("anon/about.html")
 
+@app.route('/helpcpp')
+def helpcpp():
+    if current_user.is_authenticated:
+        return render_template("user/helpcpp.html")
+    else:
+        return render_template("anon/helpcpp.html")
+
 @app.route('/help')
 def help():
     if current_user.is_authenticated:
