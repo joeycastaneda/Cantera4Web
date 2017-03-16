@@ -45,8 +45,8 @@ def help():
 
 @app.route('/execute',methods=['GET','POST'])
 def execute():
-    if(os.path.exists("/tmp/userplt.png")):
-        os.remove("/tmp/userplt.png")
+   # if(os.path.exists("/tmp/userplt.png")):
+    #    os.remove("/tmp/userplt.png")
     lang = request.args.get('lang', 0, type=str)
     plot = "F"
     output=""
@@ -150,6 +150,11 @@ def make_output():
 @app.route('/output')
 def get_output():
     return send_file("tmp/output.txt", mimetype='text/plain')
+
+@app.route('/getplot')
+def dl_plot():
+    if (os.path.exists("/tmp/userplt.png")):
+        return send_file("/tmp/userplt.png", mimetype='image/png')
 
 if __name__ == '__main__':
     app.run(debug = True)

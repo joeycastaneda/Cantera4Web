@@ -1,3 +1,20 @@
+function togglePlotBtn(option) {
+    var btn = document.getElementById('plotButton');
+    var link = document.getElementById('plotButton');
+    if(option === 0){
+        if(btn.style.display != 'none'){
+            btn.style.display = 'none';
+            link.style.display = 'none';
+        }
+    }
+
+    else{
+        btn.style.display = '';
+        link.style.display = '';
+    }
+
+});
+
 $(function() {
     $('button#execButton').on("click", function() {
         var editor = ace.edit("editor1");
@@ -16,10 +33,15 @@ $(function() {
              $.get('/tmp/userplt.png')
              .done(function() {  
                  var d = new Date();
+                 togglePlotBtn(1);
                 var imgContent = document.createElement("IMG");
                 imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
                 plot_imgDiv.appendChild(imgContent);
+
          })
+         }
+         else {
+               togglePlotBtn(0);
          }
         });
 
