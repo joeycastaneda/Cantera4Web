@@ -52,8 +52,8 @@ def help():
 
 @app.route('/execute',methods=['GET','POST'])
 def execute():
-   # if(os.path.exists("/tmp/userplt.png")):
-    #    os.remove("/tmp/userplt.png")
+    if(os.path.exists("/tmp/userplt.png")):
+        os.remove("/tmp/userplt.png")
     lang = request.args.get('lang', 0, type=str)
     plot = "F"
     output=""
