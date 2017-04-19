@@ -1,10 +1,15 @@
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600");
+
 body {
-  background: lightgray;
-  color: #666666;
-  font-family: 'RobotoDraft', 'Roboto', sans-serif;
-  font-size: 16px;
+  /*background-image: url("match.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;*/
+  background-color: #000000;
+  color: #FFFFFF;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 strong {
@@ -16,7 +21,9 @@ p {
 }
 
 .p_editor {
+    margin: 15px;
     padding: 0px 5px 10px;
+    font-size: 16px;
 }
 .p_para {
     padding: 0px 5px 10px;
@@ -24,17 +31,22 @@ p {
 }
 
 h1 {
-  padding: 10px 5px 20px;
-  font-size: 48px;
-  font-weight: 300;
-  letter-spacing: 1px;
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  margin-right: 150px;
+  margin-left: 20%;
+  text-transform: uppercase;
+  border: 0;
+  font-size: 84px;
+  font-weight: bold;
+  vertical-align: baseline;
 }
 
 h2 {
-  padding: 10px 5px 10px;
-  margin: 0px 7px;
-  font-size: 34px;
-  font-weight: 300;
+  margin: 15px;
+  font-size: 32px;
+  font-weight: bold;
 }
 
 h3 {
@@ -44,20 +56,41 @@ h3 {
   font-weight: 300;
 }
 
+select {
+    -webkit-appearance: menulist;
+    border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  width: 10%;
+  height: 30px;
+  margin: 10px;
+  font-size: 10px;
+  color: #ffffff;
+  background-color: transparent;
+}
 
 .button {
+  border-left: 1px solid white;
+  border-bottom: 1px solid white;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
   cursor: pointer;
-  background: #33b5e5;
   text-align: center;
+  text-transform: uppercase;
   letter-spacing: 1px;
-  width: 10%;
-  border: 0;
+  font-weight: bold;
+  width: 15%;
   height: 50px;
-  width: 150px;
-  margin: 7px 7px;
-  font-family: "Roboto";
-  font-size: 26px;
+  margin: 15px;
+  font-size: 20px;
   color: #ffffff;
+  background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
 }
@@ -70,11 +103,11 @@ h3 {
 }
 
 button:hover {
-  background: #178ab4;
+  background: #1E90FF;
 }
 
 .ace_editor {
-		border: 2px solid #33b5e5;
+		border: 2px solid #1E90FF;
 		height: 250px;
 		width: 98%;
         position: relative;
@@ -100,15 +133,21 @@ textarea {
     outline: none;
     font-size: 13px;
     padding: 0px 5px 15px;
-    border: 2px solid #33b5e5;
+    border: 2px solid #1E90FF;
     width: 98%;
+    background-color: #FFFFFF;
 }
 
 ul {
-    list-style-type: none;
-    margin: 0px 3px 20px;
-    overflow: hidden;
-    background-color: #33b5e5;
+    margin: 5px;
+    display: block;
+    min-width: 7.5rem;
+    height: 2.75rem;
+    padding: 0 1rem 0 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
+    font-size: 0.8rem;
+    border-bottom: 15px;
 }
 
 .active {
@@ -117,11 +156,13 @@ ul {
 
 li {
     float: left;
+    border-left: 1px solid white;
+    border-bottom: 1px solid white;
     border-right: 1px solid white;
+    border-top: 1px solid white;
 }
 
 li:last-child {
-    border-right: none;
 }
 
 li a {
@@ -136,7 +177,7 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #178ab4;
+    background-color: #1E90FF;
 }
 
 code, pre {
@@ -147,7 +188,7 @@ code, pre {
     padding: 0px;
     margin: 0px;
     position: relative;
-    left: 7px
+    left: 7px;
 }
 
 .imgdiv{
@@ -163,7 +204,6 @@ button a {
     height: 30px;
     width: 300px;
 }
-
 
 /*LOGIN PAGE SPECIFIC*/
 /* Pen Title */
