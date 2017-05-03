@@ -8,12 +8,31 @@
     <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'>
     <script src="static/js/jquery.js"></script>
     <script src="static/js/execute.js"></script>
-    <script src="static/js/editor.js"></script>
     <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
     <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="static/css/style_home.css?ver=29">
-    
+    <script>
+  $(function() {
+    $( "#tabs" ).tabs();
+    $(".ui-closable-tab").live( "click", function() {
+        var tabContainerDiv=$(this).closest(".ui-tabs").attr("id");
+        var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
+        $( "#" + panelId ).remove();
+        $("#"+tabContainerDiv).tabs("refresh");
+        var tabCount=$("#"+tabContainerDiv).find(".ui-closable-tab").length;
+        if (tabCount<1) {
+            $("#"+tabContainerDiv).hide();
+        }
+    });
+  });
+  </script>
+
+    <style>
+  .ui-icon-circle-close {
+    cursor:pointer;
+  }
+    </style>
 </head>
 <body>
     <h1>Cantera for Web</h1>
@@ -25,17 +44,30 @@
         <li style="float:right"> <a href="/login">Login</a> </li>
     </ul>
 
-    <p class = "p_editor">
-
     <strong>Enter Cantera code (in Python or C++) below and press Execute.</strong><br>
     <select class="lang" id="langSelect">
       <option value="Python">Python</option>
       <option value="C++">C++</option>
     </select>
-    <pre id="editor1"></pre>
-    <script> createEditor(); </script>
-   </p>
-   
+
+    <ul class="tabs">
+      <li><a href="#">Tab 1</a></li>
+      <li><a href="#">Tab 2</a></li>
+    </ul>
+    <!-- tab "panes" -->
+    <div class="panes">
+      <div id="pane1"></div>
+
+      <div id="pane2"></div>
+
+    </div>
+    <script>
+      $(function() {
+        $("ul.tabs").tabs("div.panes > div");
+      });
+    </script>
+    <script src="static/js/script.js"></script>
+
     <button class="button" id="execButton">Execute</button>
     <button class="button" id="importButton">Import</button>
     <input type=file id="fileImport">

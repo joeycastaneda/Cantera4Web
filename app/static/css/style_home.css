@@ -2,18 +2,18 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300italic,600italic,300,600"); 
 
 body {
-  /*background-image: url("match.jpg");
-  background-repeat: no-repeat;
-  background-attachment: fixed;*/
-  background-color: #000000;
-  color: #FFFFFF;
+  background-image: url("static/images/background.jpg");
+  background-repeat: repeat;
+  background-attachment: fixed;
+  color: #ffffff;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 14px;
+  font-size: 20px;
   -webkit-font-smoothing: antialiased;
 }
 
 strong {
-    font-weight: bold
+    font-weight: bold;
+    margin-top: 100px;
 }
 
 p {
@@ -23,36 +23,46 @@ p {
 .p_editor {
     margin: 15px;
     padding: 0px 5px 10px;
-    font-size: 16px;
+    font-size: 24px;
 }
 .p_para {
     padding: 0px 5px 10px;
     margin: 0px 7px;
+    color: #FFFFFF;
+    font-size: 24px;
 }
 
 h1 {
+  -ms-transition: 1s ease-in-out;
+  -moz-transition: 1s ease-in-out;
   display: block;
   margin-top: 50px;
-  margin-bottom: 50px;
-  margin-right: 150px;
-  margin-left: 20%;
+  margin-bottom: 75px;
+  margin-right: 300px;
+  margin-left: 300px;
   text-transform: uppercase;
-  border: 0;
-  font-size: 84px;
-  font-weight: bold;
+  font-size: 100px;
+  font-weight: 700;
   vertical-align: baseline;
+  text-align: center;
+    border-style: solid;
+  border-color: #ffffff;
+			border-top-width: 1px;
+			border-bottom-width: 1px;
+   border-right: transparent;
+    border-left: transparent;
 }
 
 h2 {
   margin: 15px;
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 50px;
+  font-weight: 100;
 }
 
 h3 {
   padding: 10px 5px 15px;
   margin: 0px 7px;
-  font-size: 26px;
+  font-size: 50px;
   font-weight: 300;
 }
 
@@ -67,7 +77,7 @@ select {
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: bold;
-  width: 10%;
+  width: 15%;
   height: 30px;
   margin: 10px;
   font-size: 10px;
@@ -75,17 +85,27 @@ select {
   background-color: transparent;
 }
 
+.close{
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  font-weight: 700px;
+  width: 7%;
+  height: 25px;
+  font-size: 3px;
+  color: rgba(255, 255, 255, 0.99);
+  background-color:rgba(227, 229, 226, 0.17);
+    margin-bottom: 10px;
+}
+
 .button {
-  border-left: 1px solid white;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
-  border-top: 1px solid white;
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
-  font-weight: bold;
-  width: 15%;
+  font-weight: 100;
+  width: 20%;
   height: 50px;
   margin: 15px;
   font-size: 20px;
@@ -103,15 +123,30 @@ select {
 }
 
 button:hover {
-  background: #1E90FF;
+  background: #99ccff;
+}
+
+.ace_scroller {
+    background-color: #333333;
+}
+
+.ace_gutter {
+    background-color: #333333;
 }
 
 .ace_editor {
-		border: 2px solid #1E90FF;
-		height: 250px;
+        border-left: 10px solid #222222;
+        border-bottom: 10px solid #333333;
+        border-top: 10px solid #333333;
+        border-right: 10px solid #333333;
+		height: 300px;
 		width: 98%;
         position: relative;
         left: 6px;
+}
+
+.ace_text-input {
+    color: #4080bf;
 }
 
 .container{ width:100%; }
@@ -119,35 +154,51 @@ button:hover {
 .align-right{float: right;width:30%}
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: #FFFFFF;
 }
 
 a.button {
-    display: inline-block;
-    width: 100px;
-    height: 27px;
-    font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 100;
+  width: 15%;
+  height: 50px;
+  margin: 15px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: transparent;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
  }
 
 textarea {
+    -moz-transition: color 1s ease-in-out, background-color 1s ease-in-out, border-bottom-color 1s ease-in-out;
     outline: none;
-    font-size: 13px;
+    font-size: 20px;
     padding: 0px 5px 15px;
-    border: 2px solid #1E90FF;
+    border: 10px solid #333333;
     width: 98%;
-    background-color: #FFFFFF;
+    background-color: #333333;
 }
 
 ul {
-    margin: 5px;
+    padding-left: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+    list-style-type: none;
     display: block;
     min-width: 7.5rem;
-    height: 2.75rem;
-    padding: 0 1rem 0 1rem;
+    height: 3.0rem;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-    font-size: 0.8rem;
-    border-bottom: 15px;
+    letter-spacing: 0.4rem;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 20px;
+    border-bottom: 1px solid #ffffff;
+    border-top: 1px solid #ffffff;
+    background-color: Transparent;
 }
 
 .active {
@@ -156,10 +207,9 @@ ul {
 
 li {
     float: left;
-    border-left: 1px solid white;
-    border-bottom: 1px solid white;
-    border-right: 1px solid white;
-    border-top: 1px solid white;
+    background-color: rgba(227, 229, 226, 0.17);
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
+    border-right: 1px solid rgba(255, 255, 255, 0.22);
 }
 
 li:last-child {
@@ -167,7 +217,7 @@ li:last-child {
 
 li a {
     display: block;
-    color: white;
+    color: #ffffff;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -177,7 +227,7 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #1E90FF;
+    background-color: #99ccff;
 }
 
 code, pre {
@@ -189,6 +239,7 @@ code, pre {
     margin: 0px;
     position: relative;
     left: 7px;
+    color: #4080bf;
 }
 
 .imgdiv{
@@ -205,130 +256,9 @@ button a {
     width: 300px;
 }
 
-
-/*LOGIN PAGE SPECIFIC*/
-/* Pen Title */
-.pen-title {
-  padding: 50px 0;
-  text-align: center;
-  letter-spacing: 2px;
-}
-.pen-title h1 {
-  margin: 0 0 20px;
-  font-size: 48px;
-  font-weight: 300;
-}
-.pen-title span {
-  font-size: 12px;
-}
-.pen-title span .fa {
-  color: #33b5e5;
-}
-.pen-title span a {
-  color: #33b5e5;
-  font-weight: 600;
-  text-decoration: none;
+ul[role=tablist]{
+    background-color: rgba(227, 229, 226, 0.17);
+    margin-left: 100px;
 }
 
-/* Form Module */
-.form-module {
-  position: relative;
-  background: #ffffff;
-  max-width: 320px;
-  width: 100%;
-  border-top: 5px solid #33b5e5;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1);
-  margin: 0 auto;
-}
-.form-module .toggle {
-  cursor: pointer;
-  position: absolute;
-  top: -0;
-  right: -0;
-  background: #33b5e5;
-  width: 30px;
-  height: 30px;
-  margin: -5px 0 0;
-  color: #ffffff;
-  font-size: 12px;
-  line-height: 30px;
-  text-align: center;
-}
-.form-module .toggle .tooltip {
-  position: absolute;
-  top: 5px;
-  right: -65px;
-  display: block;
-  background: rgba(0, 0, 0, 0.6);
-  width: auto;
-  padding: 5px;
-  font-size: 10px;
-  line-height: 1;
-  text-transform: uppercase;
-}
-.form-module .toggle .tooltip:before {
-  content: '';
-  position: absolute;
-  top: 5px;
-  left: -5px;
-  display: block;
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-right: 5px solid rgba(0, 0, 0, 0.6);
-}
-.form-module .form {
-  display: none;
-  padding: 40px;
-}
-.form-module .form:nth-child(2) {
-  display: block;
-}
-.form-module h2 {
-  margin: 0 0 20px;
-  color: #33b5e5;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 1;
-}
-.form-module input {
-  outline: none;
-  display: block;
-  width: 100%;
-  border: 1px solid #d9d9d9;
-  margin: 0 0 20px;
-  padding: 10px 15px;
-  box-sizing: border-box;
-  font-wieght: 400;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-}
-.form-module input:focus {
-  border: 1px solid #33b5e5;
-  color: #333333;
-}
-.form-module button {
-  cursor: pointer;
-  background: #33b5e5;
-  width: 100%;
-  border: 0;
-  padding: 10px 15px;
-  color: #ffffff;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-}
-.form-module button:hover {
-  background: #178ab4;
-}
-.form-module .cta {
-  background: #f2f2f2;
-  width: 100%;
-  padding: 15px 40px;
-  box-sizing: border-box;
-  color: #666666;
-  font-size: 12px;
-  text-align: center;
-}
-.form-module .cta a {
-  color: #333333;
-  text-decoration: none;
-}
+

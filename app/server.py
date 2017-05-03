@@ -25,24 +25,13 @@ class User(db.Model):
     username = db.Column('username', db.String(20), unique=True, index=True)
     password = db.Column('password', db.String(10))
     email = db.Column('email', db.String(50), unique=True, index=True)
-    #save = db.relationship('Saves', backref='users', cascade="all, delete-orphan", lazy='dynamic')
     save = db.Column('save', db.String(50000))
-#class Saves(db.Model):
- #   __tablename__ = "saves"
-  #  user_username = db.Column('user_username', db.String(20), db.ForeignKey('users.username'))
-   # user_id = db.column('user_id', db.Integer, db.ForeignKey('users.id'))
-   # save = db.Column('save', db.String(50000))
 
     def __init__(self, username, password, email, save):
         self.username = username
         self.password = password
         self.email = email
         self.save = save
-
-    #def __init__(self, user_username, user_id, save):
-     #   self.user_username = user_username
-      #  self.user_id = user_id
-       # self.save = save
 
     def is_authenticated(self):
         return True
@@ -102,9 +91,9 @@ def editor():
         output_file.write("")
         output_file.close()
     if current_user.is_authenticated:
-        return render_template("user/editor.html")
+        return render_template("user/editor3.html")
     else:
-        return render_template("anon/editor.html")
+        return render_template("anon/editor3.html")
 
 @app.route('/about')
 def about():
