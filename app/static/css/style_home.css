@@ -154,7 +154,7 @@ button:hover {
 .align-right{float: right;width:30%}
 
 a {
-    text-decoration: underline;
+    text-decoration: none;
     color: #FFFFFF;
 }
 
@@ -172,6 +172,7 @@ a.button {
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+  text-decoration: none;
  }
 
 textarea {
@@ -261,4 +262,7 @@ ul[role=tablist]{
     margin-left: 100px;
 }
 
-
+#dialog label, #dialog input { display:block; }
+#dialog label { margin-top: 0.5em; }
+#dialog input, #dialog textarea { width: 95%; }
+#add_tab { cursor: pointer; }
