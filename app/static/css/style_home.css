@@ -99,6 +99,53 @@ select {
     margin-bottom: 10px;
 }
 
+.execButton{
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 100;
+  width: 20%;
+  height: 50px;
+  margin: 15px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: transparent;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+.restoreButton{
+    cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 100;
+  width: 20%;
+  height: 50px;
+  margin: 15px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: transparent;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
+.importButton{
+    cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 100;
+  width: 20%;
+  height: 50px;
+  margin: 15px;
+  font-size: 20px;
+  color: #ffffff;
+  background-color: transparent;
+  -webkit-transition: 0.3s ease;
+  transition: 0.3s ease;
+}
+
 .button {
   cursor: pointer;
   text-align: center;
@@ -123,7 +170,7 @@ select {
 }
 
 button:hover {
-  background: #99ccff;
+  background: rgba(109, 130, 156, 0.99);
 }
 
 .ace_scroller {
@@ -183,6 +230,7 @@ textarea {
     border: 10px solid #333333;
     width: 98%;
     background-color: #333333;
+    color: white;
 }
 
 ul {
@@ -203,7 +251,7 @@ ul {
 }
 
 .active {
-    background-color: lightslategray;
+    background-color: rgba(109, 130, 156, 0.99);
 }
 
 li {
@@ -228,7 +276,7 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #99ccff;
+    background-color: rgba(109, 130, 156, 0.99);
 }
 
 code, pre {
@@ -266,3 +314,4 @@ ul[role=tablist]{
 #dialog label { margin-top: 0.5em; }
 #dialog input, #dialog textarea { width: 95%; }
 #add_tab { cursor: pointer; }
+

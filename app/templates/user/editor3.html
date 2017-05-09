@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="static/js/jquery.js"></script>
-    <script src="static/js/execute.js"></script>
     <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
     <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" charset="utf-8"></script>
@@ -70,6 +69,7 @@ $( "#add_tab" )
       <option value="C++">C++</option>
     </select>
 
+    <button class="button" id="addTab" style="color: white; font-weight: 1000px;" >Add an editor</button>
 
      <div id="dialog" title="Tab data">
     <form>
@@ -85,24 +85,8 @@ $( "#add_tab" )
     </ul>
     </div>
 
-    <button class="button" id="execButton">Execute</button>
-    <button class="button" id="restoreButton">Restore</button>
-    <button class="button" id="importButton">Import</button>
-    <button class="button" id="addTab">Add an editor</button>
-    <button id="add_tab">Add Tab</button>
-    <input type=file id="fileImport">
 
-    <h2>Output</h2>
-    <p class="p_editor">
-    <textarea id="output" placeholder="Output appears here" rows="15" ></textarea>
-   </p>
-    <button class="button" id="outputButton">
-        <a href="/output" download="output.txt">Get Output</a>
-    </button>
-   <div class="imgdiv" id="plot_img"> </div>
-    <button class="button" id="plotButton">
-        <a id='plotlink' href="/getplot" download="userplt.png">Get Plot</a>
-    </button>
+
 
 </body>
 </html>
