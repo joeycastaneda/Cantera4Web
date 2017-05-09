@@ -1,17 +1,18 @@
 #!/usr/bin/python
 import sys, helpers, os
 from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file, Response
-from User import User
+#from User import User
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
+from sqlalchemy_utils import ScalarListType
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
 
 
 app = Flask(__name__)
 app.secret_key = 'Thisissecret'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 engine = db.engine
@@ -26,12 +27,16 @@ class User(db.Model):
     password = db.Column('password', db.String(10))
     email = db.Column('email', db.String(50), unique=True, index=True)
     save = db.Column('save', db.String(50000))
+    savearr = db.Column(ScalarListType())
+    namearr = db.Column(ScalarListType())
 
-    def __init__(self, username, password, email, save):
+    def __init__(self, username, password, email, save, savearr, namearr):
         self.username = username
         self.password = password
         self.email = email
         self.save = save
+        self.savearr = savearr
+        self.namearr = namearr
 
     def is_authenticated(self):
         return True
@@ -145,6 +150,70 @@ def save():
         conn.execute("UPDATE users set save=\'{0}\' where username=\'{1}\'".format(code, current))
         conn.close()
     return (''), 204
+
+@app.route('/saveFile')
+def saveFile():
+    code = request.args.get('code', 0, type=str)
+    filename = request.args.get('filename', 0, type=str)
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        newArr = user.savearr[:]
+
+        newArr[user.namearr.index(filename)] = code
+        user.savearr = newArr
+        #print user.savearr
+        db.session.commit()
+        print "tmp/" + filename
+        if (os.path.exists("/tmp/" + filename)):
+            print "Found file"
+            with open("/tmp/" + filename, "w") as file:
+                file.write(code)
+                file.close()
+    return (''), 204
+
+@app.route('/createFile')
+def createFile():
+    filename = request.args.get('filename', 0, type=str)
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        newSaveArr = user.savearr[:]
+        newNameArr = user.namearr
+        for name in newNameArr:
+            if(name == ""):
+                newNameArr[0] = filename
+                #newSaveArr[newNameArr.index(filename)] = ""
+                user.savearr = newSaveArr
+                user.namearr = newNameArr
+                db.session.commit()
+                with open("/tmp/" + filename, "w") as file:
+                    file.write("")
+                    file.close()
+                    return (''), 204
+        return (''), 405
+
+@app.route('/delete')
+def deleteFile():
+    filename = request.args.get('filename', 0, type=str)
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        newSaveArr = user.savearr[:]
+        newNameArr = user.namearr
+        newSaveArr[user.namearr.index(filename)] = ""
+        newNameArr[user.namearr.index(filename)] = ""
+        user.namearr = newNameArr
+        user.savearr = newSaveArr
+        if (os.path.exists("/tmp/" + filename)):
+            os.remove("/tmp/" + filename)
+    return (''), 204
+
+@app.route('/getFilenames')
+def filenames():
+
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        return jsonify(list = user.namearr, code = user.savearr)
+    else:
+        return (''), 404
 
 @app.route('/restore')
 def restore():
