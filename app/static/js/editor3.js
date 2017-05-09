@@ -6,6 +6,40 @@ $(document).ready(function() {
     // array containing all the editors we will create
     var editors = [];
 
+    $( function() {
+    var tabTitle = $( "#tab_title" );
+
+    // Modal dialog init: custom buttons and a "close" callback resetting the form inside
+    var dialog = $( "#dialog" ).dialog({
+      autoOpen: false,
+      modal: true,
+      buttons: {
+        Add: function() {
+          addTab();
+          $( this ).dialog( "close" );
+        },
+        Cancel: function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        form[ 0 ].reset();
+      }
+    });
+
+    var form = dialog.find( "form" ).on( "submit", function( event ) {
+          addTab();
+          dialog.dialog( "close" );
+          event.preventDefault();
+        });
+
+    $( "#add_tab" )
+        .button()
+        .on( "click", function() {
+        dialog.dialog( "open" );
+    });
+    });
+
     // initialize button listener
     $('#addTab').on('click', function () {
 
@@ -14,12 +48,10 @@ $(document).ready(function() {
         var tabsUlElement = tabsElement.find('ul');
 
         // the panel id is a timestamp plus a random number from 0 to 10000
-        var title = document.getElementById(tab_title);
-        console.log(title);
         var tabUniqueId = Math.floor(Math.random() * 10000);
 
         // create a navigation bar item for the new panel
-        var newTabNavElement = $('<li style="background-color: rgba(255, 212, 12, 0.17);border: 1px solid #ffd40c;color: #ffffff;" ;" + id="panel_nav_' + tabUniqueId + '"tab-id="' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
+        var newTabNavElement = $('<li style="background-color:rgba(156,156,156,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
 
         // add the new nav item to the DOM
         tabsUlElement.append(newTabNavElement);
@@ -68,12 +100,12 @@ $(document).ready(function() {
         var execButton = $('<button class="execButton" id="execButton">Execute</button>');
         var restoreButton = $('<button class="restoreButton" id="restoreButton">Restore</button>');
         var importButton = $('<button class="importButton" id="importButton" >Import</button>');
-        var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
-        var header = $('<h2 style="color:#ffd40c ;">Output</h2>');
+        var fileImport = $('<input style="color: white;" type=file id="fileImport">');
+        var header = $('<h2 style="color: #ffffff;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id="output" placeholder="Output appears here" rows="15" ></textarea> </p>');
-        var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
+        var outputButton = $('<button style="color: white;" class="button" id="outputButton"> <a style="color: white;" href="/output" download="output.txt">Get Output</a> </button>');
         var img = $('<div class="imgdiv" id="plot_img"> </div>');
-        var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
+        var plot = $('<button class="button" id="plotButton" style="color: white;" > <a style="color: white;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         var newTab = $('<div id="dialog" title="Tab data"> <form> <fieldset class="ui-helper-reset"> <label for="tab_title">Title</label> <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all"> </fieldset> </form> </div>');
         newTabPanelElement.append(newTab);
         newTabPanelElement.append(execButton);
@@ -245,7 +277,8 @@ $(document).ready(function() {
     });
 
     timeout_id = null;
-        $('#tabs').keypress(function () {
+    $(function () {
+        $(document).keypress(function () {
             if (timeout_id) {
                 timeout_id = clearTimeout(timeout_id);
             }
@@ -268,4 +301,6 @@ $(document).ready(function() {
                 return false;
             }, 750);
         });
+    });
+
 });
