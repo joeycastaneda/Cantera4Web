@@ -46,7 +46,7 @@ $( "#add_tab" )
     .on( "click", function() {
     dialog.dialog( "open" );
 });
-} );
+});
 
 </script>
 
@@ -60,6 +60,7 @@ $( "#add_tab" )
         <li><a href="/help">Help</a></li>
         <li><a href="/helpcpp">C++ Help</a></li>
         <li ><a href="/about">About</a></li>
+        <li style="float:right"> <a href="/logout">Logout</a> </li>
     </ul>
   <div align="left">
     <strong>Enter Cantera code (in Python or C++) below and press Execute.</strong><br>
@@ -68,8 +69,8 @@ $( "#add_tab" )
       <option value="Python">Python</option>
       <option value="C++">C++</option>
     </select>
-
-    <button class="button" id="addTab" style="color: white; font-weight: 1000px;" >Add an editor</button>
+    <button class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
+    <button class="button" id="addTab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
      <div id="dialog" title="Tab data">
     <form>
@@ -80,7 +81,7 @@ $( "#add_tab" )
     </form>
     </div>
 
-    <div style="background-color: transparent; width: 96%; border: transparent; margin-top: 30px; margin-left: 10px;" id="tabs">
+    <div style="background-color: transparent; width: 96%; border: #ffd40c; margin-top: 30px; margin-left: 10px;" id="tabs">
     <ul>
     </ul>
     </div>
