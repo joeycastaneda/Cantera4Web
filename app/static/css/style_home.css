@@ -5,7 +5,7 @@ body {
   background-image: url("static/images/background.jpg");
   background-repeat: repeat;
   background-attachment: fixed;
-  color: #ffffff;
+  color: #ffd40c;
   font-family: 'Source Sans Pro', sans-serif;
   font-size: 20px;
   -webkit-font-smoothing: antialiased;
@@ -28,7 +28,7 @@ p {
 .p_para {
     padding: 0px 5px 10px;
     margin: 0px 7px;
-    color: #FFFFFF;
+    color: #ffd40c;
     font-size: 24px;
 }
 
@@ -36,17 +36,17 @@ h1 {
   -ms-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   display: block;
-  margin-top: 50px;
-  margin-bottom: 75px;
-  margin-right: 300px;
-  margin-left: 300px;
+  margin-top: 7%;
+  margin-bottom: 7%;
+  margin-right: 20%;
+  margin-left: 20%;
   text-transform: uppercase;
-  font-size: 100px;
+  font-size: 4em;
   font-weight: 700;
   vertical-align: baseline;
   text-align: center;
     border-style: solid;
-  border-color: #ffffff;
+  border-color: #ffd40c;
 			border-top-width: 1px;
 			border-bottom-width: 1px;
    border-right: transparent;
@@ -68,10 +68,10 @@ h3 {
 
 select {
     -webkit-appearance: menulist;
-    border-left: 1px solid white;
-  border-bottom: 1px solid white;
-  border-right: 1px solid white;
-  border-top: 1px solid white;
+    border-left: 1px solid #ffd40c;
+  border-bottom: 1px solid #ffd40c;
+  border-right: 1px solid #ffd40c;
+  border-top: 1px solid #ffd40c;
   cursor: pointer;
   text-align: center;
   text-transform: uppercase;
@@ -81,7 +81,7 @@ select {
   height: 30px;
   margin: 10px;
   font-size: 10px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
 }
 
@@ -109,10 +109,11 @@ select {
   height: 50px;
   margin: 15px;
   font-size: 20px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+    border: solid 1px #ffd40c;
 }
 .restoreButton{
     cursor: pointer;
@@ -124,10 +125,11 @@ select {
   height: 50px;
   margin: 15px;
   font-size: 20px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+    border: solid 1px #ffd40c;
 }
 
 .importButton{
@@ -140,10 +142,11 @@ select {
   height: 50px;
   margin: 15px;
   font-size: 20px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+    border: solid 1px #ffd40c;
 }
 
 .button {
@@ -156,10 +159,11 @@ select {
   height: 50px;
   margin: 15px;
   font-size: 20px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
+    border: solid 1px #ffd40c;
 }
 
 .button .register{
@@ -170,7 +174,7 @@ select {
 }
 
 button:hover {
-  background: rgba(109, 130, 156, 0.99);
+  background: rgba(255, 212, 12, 0.42);
 }
 
 .ace_scroller {
@@ -202,7 +206,7 @@ button:hover {
 
 a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #ffd40c;
 }
 
 a.button {
@@ -215,11 +219,12 @@ a.button {
   height: 50px;
   margin: 15px;
   font-size: 20px;
-  color: #ffffff;
+  color: #ffd40c;
   background-color: transparent;
   -webkit-transition: 0.3s ease;
   transition: 0.3s ease;
   text-decoration: none;
+    border: solid 1px #ffd40c;
  }
 
 textarea {
@@ -230,7 +235,7 @@ textarea {
     border: 10px solid #333333;
     width: 98%;
     background-color: #333333;
-    color: white;
+    color: #ffd40c;
 }
 
 ul {
@@ -245,13 +250,13 @@ ul {
     letter-spacing: 0.4rem;
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 20px;
-    border-bottom: 1px solid #ffffff;
-    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffd40c;
+    border-top: 1px solid #ffd40c;
     background-color: Transparent;
 }
 
 .active {
-    background-color: rgba(109, 130, 156, 0.99);
+    background-color: rgba(255, 212, 12, 0.32);
 }
 
 li {
@@ -266,7 +271,7 @@ li:last-child {
 
 li a {
     display: block;
-    color: #ffffff;
+    color: #ffd40c;
     font-size: 18px;
     font-weight: bold;
     text-align: center;
@@ -276,7 +281,7 @@ li a {
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: rgba(109, 130, 156, 0.99);
+    background-color: rgba(255, 212, 12, 0.39);
 }
 
 code, pre {
@@ -299,7 +304,7 @@ code, pre {
 }
 
 button a {
-    color: #FFFFFF;
+    color: #ffd40c;
     font-size: 22px;
     height: 30px;
     width: 300px;
@@ -308,7 +313,16 @@ button a {
 ul[role=tablist]{
     background-color: rgba(227, 229, 226, 0.17);
     margin-left: 100px;
+    border: 1px solid #ffd40c;
 }
+
+li[role=tab]{
+    background-color: rgba(156, 156, 156, 0.17);
+    margin-left: 100px;
+    border: 1px solid #ffffff;
+    color: #ffffff;
+}
+
 
 #dialog label, #dialog input { display:block; }
 #dialog label { margin-top: 0.5em; }
