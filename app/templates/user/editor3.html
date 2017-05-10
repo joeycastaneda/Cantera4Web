@@ -13,43 +13,6 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src ="static/js/editor3.js"></script>
 
-  <script>
-    $( function() {
-    var tabTitle = $( "#tab_title" );
-
-    // Modal dialog init: custom buttons and a "close" callback resetting the form inside
-    var dialog = $( "#dialog" ).dialog({
-      autoOpen: false,
-      modal: true,
-      buttons: {
-        Add: function() {
-          addTab();
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-      close: function() {
-        form[ 0 ].reset();
-      }
-    });
-
-var form = dialog.find( "form" ).on( "submit", function( event ) {
-      addTab();
-      dialog.dialog( "close" );
-      event.preventDefault();
-    });
-
-$( "#add_tab" )
-    .button()
-    .on( "click", function() {
-    dialog.dialog( "open" );
-});
-});
-
-</script>
-
 </head>
 
 <body>
@@ -70,13 +33,12 @@ $( "#add_tab" )
       <option value="C++">C++</option>
     </select>
     <button class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
-    <button class="button" id="addTab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
      <div id="dialog" title="Tab data">
     <form>
     <fieldset class="ui-helper-reset">
       <label for="tab_title">Title</label>
-      <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all">
+      <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
     </fieldset>
     </form>
     </div>
