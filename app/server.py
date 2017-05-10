@@ -151,24 +151,59 @@ def save():
         conn.close()
     return (''), 204
 
+@app.route('/numFiles')
+def getNumFiles():
+    if current_user.is_authenticated:
+        return jsonify(count = numFiles())
+
+def numFiles():
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        newArr = user.namearr[:]
+        count = 0
+        for item in newArr:
+            if (item != ""):
+                count += 1
+        return count
+
 @app.route('/saveFile')
 def saveFile():
+    print "numFiles: " + str(numFiles())
     code = request.args.get('code', 0, type=str)
     filename = request.args.get('filename', 0, type=str)
     if current_user.is_authenticated:
-        user = db.session.query(User).filter_by(username=current_user.username).first()
-        newArr = user.savearr[:]
+        if(filename in current_user.namearr):
+            user = db.session.query(User).filter_by(username=current_user.username).first()
+            newArr = user.savearr[:]
+            newArr[user.namearr.index(filename)] = code
+            user.savearr = newArr
+            print user.savearr
+            db.session.commit()
+            print "tmp/" + filename
+            if (os.path.exists("/tmp/" + filename)):
+                print "Found file"
+                with open("/tmp/" + filename, "w") as file:
+                    file.write(code)
+                    file.close()
+        elif (numFiles() < 10):
+            user = db.session.query(User).filter_by(username=current_user.username).first()
+            newSaveArr = user.savearr[:]
+            newNameArr = user.namearr[:]
+            for index, name in enumerate(newNameArr):
+                if (name == ""):
+                    newNameArr[index] = filename
+                    #print "tmp/" + filename
+                    newSaveArr[index] = code
+                    print newNameArr
+                    user.savearr = newSaveArr
+                    user.namearr = newNameArr
+                    print user.namearr
+                    db.session.commit()
+                    with open("/tmp/" + filename, "w") as file:
+                        file.write("")
+                        file.close()
+                        return (''), 204
 
-        newArr[user.namearr.index(filename)] = code
-        user.savearr = newArr
-        #print user.savearr
-        db.session.commit()
-        print "tmp/" + filename
-        if (os.path.exists("/tmp/" + filename)):
-            print "Found file"
-            with open("/tmp/" + filename, "w") as file:
-                file.write(code)
-                file.close()
     return (''), 204
 
 @app.route('/createFile')
@@ -191,7 +226,7 @@ def createFile():
                     return (''), 204
         return (''), 405
 
-@app.route('/delete')
+@app.route('/deleteFile')
 def deleteFile():
     filename = request.args.get('filename', 0, type=str)
     if current_user.is_authenticated:
