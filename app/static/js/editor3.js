@@ -73,9 +73,9 @@ $(document).ready(function() {
         var importButton = $('<button class="importButton" id="importButton" >Import</button>');
         var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
-        var output = $('<p class="p_editor"> <textarea id="output" placeholder="Output appears here" rows="15" ></textarea> </p>');
+        var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="outputButton" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img"> </div>');
+        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
         var plot = $('<button class="plotButton" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
@@ -160,9 +160,9 @@ var $form = $( "form", dialog ).submit(function() {
         var importButton = $('<button class="importButton" id="importButton" >Import</button>');
         var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
-        var output = $('<p class="p_editor"> <textarea id="output" placeholder="Output appears here" rows="15" ></textarea> </p>');
+        var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img"> </div>');
+        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
         var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
@@ -197,7 +197,7 @@ $( "#add_tab" )
 
         var resultArray = $.grep(editors, function (n, i) {
             return n.id === tabUniqueId;
-        }, true);
+        });
 
         var editor = resultArray[0].instance;
 
@@ -234,16 +234,24 @@ $( "#add_tab" )
 
         var resultArray = $.grep(editors, function (n, i) {
             return n.id === tabUniqueId;
-        }, true);
+        });
         var editor = resultArray[0].instance;
+        console.log(editor);
         var text = editor.getValue();
         var lang = $("#langSelect>option:selected").html()
         $.getJSON('/execute', {
             code: text,
             lang: lang
         }, function (data) {
-            $('textarea#output').val(data.output);
-            var plot_imgDiv = document.getElementById("plot_img");
+            string = 'textarea#output' + tabUniqueId;
+            console.log(string);
+            out = $(string);
+            console.log(out);
+            console.log(data.output);
+            out.val(data.output);
+            s = 'plot_img' +  tabUniqueId;
+            console.log(s);
+            var plot_imgDiv = document.getElementById(s);
             while (plot_imgDiv.firstChild) {
                 plot_imgDiv.removeChild(plot_imgDiv.firstChild);
             }
@@ -303,7 +311,7 @@ $( "#add_tab" )
 
         var resultArray = $.grep(editors, function (n, i) {
             return n.id === tabUniqueId;
-        }, true);
+        });
 
         var editor = resultArray[0].instance;
         var filename = x.files[0].name;
@@ -328,7 +336,7 @@ $( "#add_tab" )
 
             var resultArray = $.grep(editors, function (n, i) {
                 return n.id === tabUniqueId;
-            }, true);
+            });
 
             var editor = resultArray[0].instance;
             var lang = $("#langSelect>option:selected").html()
@@ -355,7 +363,7 @@ $( "#add_tab" )
 
                 var resultArray = $.grep(editors, function (n, i) {
                     return n.id === tabUniqueId;
-                }, true);
+                });
 
                 var editor = resultArray[0].instance;
                 var text = editor.getValue();
