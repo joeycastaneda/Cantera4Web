@@ -36,13 +36,17 @@ h1 {
   -ms-transition: 1s ease-in-out;
   -moz-transition: 1s ease-in-out;
   display: block;
-  margin-top: 7%;
-  margin-bottom: 7%;
+  margin-top: 3%;
+  margin-bottom: 5%;
   margin-right: 20%;
   margin-left: 20%;
   text-transform: uppercase;
-  font-size: 4em;
-  font-weight: 700;
+  color: #ffd40c;
+    font-size: 5rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
   vertical-align: baseline;
   text-align: center;
     border-style: solid;
@@ -86,93 +90,197 @@ select {
 }
 
 .close{
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: .5px;
-  font-weight: 700px;
-  width: 7%;
-  height: 25px;
-  font-size: 3px;
-  color: rgba(255, 255, 255, 0.99);
-  background-color:rgba(227, 229, 226, 0.17);
-    margin-bottom: 10px;
+  -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 2px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: .5rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+        margin-bottom: 10px;
 }
 
 .execButton{
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 100;
-  width: 20%;
-  height: 50px;
-  margin: 15px;
-  font-size: 20px;
-  color: #ffd40c;
-  background-color: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-    border: solid 1px #ffd40c;
+  -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .restoreButton{
-    cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 100;
-  width: 20%;
-  height: 50px;
-  margin: 15px;
-  font-size: 20px;
-  color: #ffd40c;
-  background-color: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-    border: solid 1px #ffd40c;
+    -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .importButton{
-    cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 100;
-  width: 20%;
-  height: 50px;
-  margin: 15px;
-  font-size: 20px;
-  color: #ffd40c;
-  background-color: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-    border: solid 1px #ffd40c;
+    -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.button {
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 100;
-  width: 20%;
-  height: 50px;
-  margin: 15px;
-  font-size: 20px;
-  color: #ffd40c;
-  background-color: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-    border: solid 1px #ffd40c;
+.outputButton{
+    -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
-.button .register{
-     font-size: 12px;
-     letter-spacing: 0px;
-     
-
+.plotButton{
+    -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
-
 button:hover {
   background: rgba(255, 212, 12, 0.42);
 }
@@ -190,7 +298,8 @@ button:hover {
         border-bottom: 10px solid #333333;
         border-top: 10px solid #333333;
         border-right: 10px solid #333333;
-		height: 300px;
+		font-size: 20px;
+        height: 300px;
 		width: 98%;
         position: relative;
         left: 6px;
@@ -198,6 +307,7 @@ button:hover {
 
 .ace_text-input {
     color: #4080bf;
+    letter-spacing: normal;
 }
 
 .container{ width:100%; }
@@ -209,23 +319,7 @@ a {
     color: #ffd40c;
 }
 
-a.button {
-  cursor: pointer;
-  text-align: center;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 100;
-  width: 15%;
-  height: 50px;
-  margin: 15px;
-  font-size: 20px;
-  color: #ffd40c;
-  background-color: transparent;
-  -webkit-transition: 0.3s ease;
-  transition: 0.3s ease;
-  text-decoration: none;
-    border: solid 1px #ffd40c;
- }
+
 
 textarea {
     -moz-transition: color 1s ease-in-out, background-color 1s ease-in-out, border-bottom-color 1s ease-in-out;
@@ -303,27 +397,26 @@ code, pre {
     margin: 10px  5px 0px;
 }
 
-button a {
-    color: #ffd40c;
-    font-size: 22px;
-    height: 30px;
-    width: 300px;
-}
+
 
 ul[role=tablist]{
     background-color: rgba(227, 229, 226, 0.17);
     margin-left: 100px;
     border: 1px solid #ffd40c;
+    text-transform:none;
 }
 
 li[role=tab]{
-    background-color: rgba(156, 156, 156, 0.17);
+    background-color: rgba(255, 212, 12, 0.33);
     margin-left: 100px;
     border: 1px solid #ffffff;
     color: #ffffff;
+    text-transform:none;
 }
 
-
+div role[dialog]{
+    border:none;
+}
 #dialog label, #dialog input {
     display:block;
 }
@@ -338,5 +431,135 @@ li[role=tab]{
 #add_tab {
     cursor: pointer;
 }
-.ui-helper-reset{
+
+.ui-widget-content{
+   background-color: rgba(27, 31, 34, 0.85);
+    font-size: 1rem;
+		font-weight: 300;
+		line-height: 2.75rem;
+    border: solid 1px #ffd40c;
+    color: #ffd40c;
 }
+.ui-dialog-titlebar{
+     background-color: rgba(27, 31, 34, 0.61);
+    border-bottom: 1px solid #ffd40c;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+    text-transform: uppercase;
+    color: #ffd40c;
+}
+
+.ui-dialog-buttonpane{
+    background-color: rgba(27, 31, 34, 0.51);
+    border: none
+    font-size: 1rem;
+    align: center;
+}
+
+.ui-button{
+    -moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+
+}
+
+.ui-button:hover{
+    background: rgba(255, 212, 12, 0.42);
+}
+.ui-button-icon{
+    border: none;
+      background-color: rgba(27, 31, 34, 0.85);
+     color: #ffd40c;
+}
+
+#footer {
+		width: 100%;
+		max-width: 100%;
+        margin-bottom: 3%;
+		text-align: center;
+	}
+
+		#footer .copyright {
+			letter-spacing: 0.2rem;
+			font-size: 1.5rem;
+			opacity: 0.75;
+			text-transform: uppercase;
+		}
+
+		body.is-article-visible #footer {
+			-moz-transform: scale(0.95);
+			-webkit-transform: scale(0.95);
+			-ms-transform: scale(0.95);
+			transform: scale(0.95);
+			-moz-filter: blur(0.1rem);
+			-webkit-filter: blur(0.1rem);
+			-ms-filter: blur(0.1rem);
+			filter: blur(0.1rem);
+			opacity: 0;
+		}
+
+		body.is-loading #footer {
+			opacity: 0;
+		}
+
+.button {
+		-moz-appearance: none;
+		-webkit-appearance: none;
+		-ms-appearance: none;
+		appearance: none;
+		-moz-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-webkit-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		-ms-transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+		background-color: transparent;
+		border-radius: 4px;
+		border: 0;
+		box-shadow: inset 0 0 0 1px #ffd40c;
+		color: #ffd40c !important;
+		cursor: pointer;
+		display: inline-block;
+		font-size: 1rem;
+		font-weight: 300;
+		height: 2.75rem;
+		letter-spacing: 0.2rem;
+		line-height: 2.75rem;
+		outline: 0;
+		padding: 0 1.25rem 0 1.35rem;
+		text-align: center;
+		text-decoration: none;
+		text-transform: uppercase;
+		white-space: nowrap;
+    margin-right: 10px;
+        margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+	}

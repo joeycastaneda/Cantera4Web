@@ -22,7 +22,7 @@ $(document).ready(function() {
         //var tabUniqueId = "hello.py";
         console.log(tabTitle.val());
         // create a navigation bar item for the new panel
-        var newTabNavElement = $('<li style="background-color:rgba(156,156,156,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
+        var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.62);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
 
         // add the new nav item to the DOM
         tabsUlElement.append(newTabNavElement);
@@ -71,14 +71,12 @@ $(document).ready(function() {
         var execButton = $('<button class="execButton" id="execButton">Execute</button>');
         var restoreButton = $('<button class="restoreButton" id="restoreButton">Restore</button>');
         var importButton = $('<button class="importButton" id="importButton" >Import</button>');
-        var fileImport = $('<input style="color: white;" type=file id="fileImport">');
-        var header = $('<h2 style="color: #ffffff;">Output</h2>');
+        var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
+        var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id="output" placeholder="Output appears here" rows="15" ></textarea> </p>');
-        var outputButton = $('<button style="color: white;" class="button" id="outputButton"> <a style="color: white;" href="/output" download="output.txt">Get Output</a> </button>');
+        var outputButton = $('<button style="color: #ffd40c;" class="outputButton" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
         var img = $('<div class="imgdiv" id="plot_img"> </div>');
-        var plot = $('<button class="button" id="plotButton" style="color: white;" > <a style="color: white;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
-        var newTab = $('<div id="dialog" title="Tab data"> <form> <fieldset class="ui-helper-reset"> <label for="tab_title">Title</label> <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all"> </fieldset> </form> </div>');
-        newTabPanelElement.append(newTab);
+        var plot = $('<button class="plotButton" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
         newTabPanelElement.append(importButton);
@@ -160,14 +158,12 @@ var $form = $( "form", dialog ).submit(function() {
         var execButton = $('<button class="execButton" id="execButton">Execute</button>');
         var restoreButton = $('<button class="restoreButton" id="restoreButton">Restore</button>');
         var importButton = $('<button class="importButton" id="importButton" >Import</button>');
-        var fileImport = $('<input style="color: white;" type=file id="fileImport">');
-        var header = $('<h2 style="color: #ffffff;">Output</h2>');
+        var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
+        var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id="output" placeholder="Output appears here" rows="15" ></textarea> </p>');
-        var outputButton = $('<button style="color: white;" class="button" id="outputButton"> <a style="color: white;" href="/output" download="output.txt">Get Output</a> </button>');
+        var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
         var img = $('<div class="imgdiv" id="plot_img"> </div>');
-        var plot = $('<button class="button" id="plotButton" style="color: white;" > <a style="color: white;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
-        var newTab = $('<div id="dialog" title="Tab data"> <form> <fieldset class="ui-helper-reset"> <label for="tab_title">Title</label> <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all"> </fieldset> </form> </div>');
-        newTabPanelElement.append(newTab);
+        var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
         newTabPanelElement.append(importButton);

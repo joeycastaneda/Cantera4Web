@@ -17,7 +17,11 @@
 
 <body>
 
-<h1>Cantera for Web</h1>
+<h1>Cantera for Web
+<footer id="footer">
+    <p class="copyright">&copy; UC Davis </p>
+</footer>
+</h1>
     <ul>
         <li><a class="active" href="/">Editor</a></li>
         <li><a href="/help">Help</a></li>
@@ -32,16 +36,16 @@
       <option value="Python">Python</option>
       <option value="C++">C++</option>
     </select>
-    <button class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
+    <button style="background-color: transparent; hover:background rgba(255, 212, 12, 0.42);" class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
-     <div id="dialog" title="Tab data">
+     <article id="dialog" title="New Tab">
     <form>
     <fieldset class="ui-helper-reset">
       <label for="tab_title">Title</label>
       <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
     </fieldset>
     </form>
-    </div>
+    </article>
 
     <div style="background-color: transparent; width: 96%; border: #ffd40c; margin-top: 30px; margin-left: 10px;" id="tabs">
     <ul>
