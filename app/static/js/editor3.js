@@ -109,7 +109,7 @@ var $form = $( "form", dialog ).submit(function() {
         //console.log(tabUniqueId);
 
         // create a navigation bar item for the new panel
-        var newTabNavElement = $('<li style="background-color:rgba(156,156,156,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
+        var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
 
         // add the new nav item to the DOM
         tabsUlElement.append(newTabNavElement);
@@ -175,7 +175,8 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(img);
         newTabPanelElement.append(plot);
         event.preventDefault();
-        $( this ).dialog( "close" );
+         $( this ).dialog( "close" );
+
     });
 
 $( "#add_tab" )
