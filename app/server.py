@@ -7,6 +7,7 @@ from sqlalchemy import create_engine
 from sqlalchemy_utils import ScalarListType
 from sqlalchemy.orm import scoped_session, sessionmaker
 from flask_login import login_user , logout_user , current_user , login_required, LoginManager
+from flask_mail import Mail, Message
 
 
 app = Flask(__name__)
@@ -19,6 +20,14 @@ engine = db.engine
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
+
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'cantera4web@gmail.com'
+app.config['MAIL_PASSWORD'] = 'canterashaw'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+mail = Mail(app)
 
 class User(db.Model):
     __tablename__ = "users"
@@ -120,6 +129,21 @@ def help():
         return render_template("user/help.html")
     else:
         return render_template("anon/help.html")
+    
+@app.route('/forget', methods=['GET', 'POST'])
+def forget():
+    if request.method == 'GET':
+        return render_template('forget.html')
+    username = request.form['username']
+    registered_user = User.query.filter_by(username=username).first()
+    if registered_user is None:
+        flash('Username is invalid', 'error')
+        return redirect(url_for('forget'))
+    if registered_user.is_authenticated:
+        msg = Message('Hello', sender='cantera4web@gmail.com', recipients=[registered_user.email])
+        msg.body = "Your password is "+ registered_user.password
+        mail.send(msg)
+        return "Your password has been sent. Hit the back button to return to the website."    
 
 @app.route('/execute',methods=['GET','POST'])
 def execute():
