@@ -27,8 +27,8 @@ class User(db.Model):
     password = db.Column('password', db.String(10))
     email = db.Column('email', db.String(50), unique=True, index=True)
     save = db.Column('save', db.String(50000))
-    savearr = db.Column(ScalarListType())
-    namearr = db.Column(ScalarListType())
+    savearr = db.Column(ScalarListType(separator=u'~)23#&'))
+    namearr = db.Column(ScalarListType(separator=u'~)23#&'))
 
     def __init__(self, username, password, email, save, savearr, namearr):
         self.username = username
@@ -60,7 +60,7 @@ db.session.commit()
 def index():
     if request.method == 'GET':
         return render_template('index.html')
-    print request.form['btn']
+   # print request.form['btn']
     if request.form['btn'] == 'login':
         username = request.form['username']
         password = request.form['password']
@@ -73,14 +73,17 @@ def index():
         return redirect(url_for('editor'))
     elif request.form['btn'] == 'register':
         try:
-            user = User(request.form['username'], request.form['password'], request.form['email'], "")
+            blankarr = ["", "", "", "", "", "", "", "", "", ""]
+            blankarr2 = blankarr[:]
+            user = User(request.form['username'], request.form['password'], request.form['email'], "", blankarr, blankarr2)
             db.session.add(user)
             db.session.commit()
             flash('User successfully registered')
-            return redirect(url_for('index#login'))
+           # print "USER CREATED"
+            return render_template('user/editor3.html')
         except:
             flash('Username or Email already exists')
-            return redirect(url_for('index'))
+            return render_template('index.html')
     else:
         return redirect(url_for('index'))
 
@@ -139,6 +142,7 @@ def execute():
     with open('tmp/output.txt', 'w') as output_file:
         output_file.write(str(output))
         output_file.close()
+    #print output
     return jsonify(output = output, plot = plot)
 
 @app.route('/save')
@@ -168,7 +172,7 @@ def numFiles():
 
 @app.route('/saveFile')
 def saveFile():
-    print "numFiles: " + str(numFiles())
+   # print "numFiles: " + str(numFiles())
     code = request.args.get('code', 0, type=str)
     filename = request.args.get('filename', 0, type=str)
     if current_user.is_authenticated:
@@ -177,11 +181,11 @@ def saveFile():
             newArr = user.savearr[:]
             newArr[user.namearr.index(filename)] = code
             user.savearr = newArr
-            print user.savearr
+           # print user.savearr
             db.session.commit()
-            print "tmp/" + filename
+           # print "tmp/" + filename
             if (os.path.exists("/tmp/" + filename)):
-                print "Found file"
+             #   print "Found file"
                 with open("/tmp/" + filename, "w") as file:
                     file.write(code)
                     file.close()
@@ -194,10 +198,10 @@ def saveFile():
                     newNameArr[index] = filename
                     #print "tmp/" + filename
                     newSaveArr[index] = code
-                    print newNameArr
+                  #  print newNameArr
                     user.savearr = newSaveArr
                     user.namearr = newNameArr
-                    print user.namearr
+                  #  print user.namearr
                     db.session.commit()
                     with open("/tmp/" + filename, "w") as file:
                         file.write("")
@@ -229,16 +233,19 @@ def createFile():
 @app.route('/deleteFile')
 def deleteFile():
     filename = request.args.get('filename', 0, type=str)
+    #print current_user.namearr
     if current_user.is_authenticated:
-        user = db.session.query(User).filter_by(username=current_user.username).first()
-        newSaveArr = user.savearr[:]
-        newNameArr = user.namearr
-        newSaveArr[user.namearr.index(filename)] = ""
-        newNameArr[user.namearr.index(filename)] = ""
-        user.namearr = newNameArr
-        user.savearr = newSaveArr
-        if (os.path.exists("/tmp/" + filename)):
-            os.remove("/tmp/" + filename)
+        if(filename in current_user.namearr):
+            user = db.session.query(User).filter_by(username=current_user.username).first()
+            newSaveArr = user.savearr[:]
+            newNameArr = user.namearr[:]
+            newSaveArr[user.namearr.index(filename)] = ""
+            newNameArr[user.namearr.index(filename)] = ""
+            user.namearr = newNameArr
+            user.savearr = newSaveArr
+            db.session.commit();
+            if (os.path.exists("/tmp/" + filename)):
+                os.remove("/tmp/" + filename)
     return (''), 204
 
 @app.route('/getFilenames')
@@ -318,7 +325,7 @@ def get_example():
 @app.route('/makeoutput')
 def make_output():
     output = request.args.get('output', 0, type=str)
-    print str(output)
+    #print str(output)
     with open('tmp/output.txt', 'w') as output_file:
         output_file.write(str(output))
         output_file.close()

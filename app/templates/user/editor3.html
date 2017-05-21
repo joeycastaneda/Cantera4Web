@@ -38,11 +38,13 @@
     </select>
     <button style="background-color: transparent; hover:background rgba(255, 212, 12, 0.42);" class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
-     <article id="dialog" title="New Tab">
+     <article id="dialog" title="New Editor">
     <form>
     <fieldset class="ui-helper-reset">
-      <label for="tab_title">Title</label>
-      <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
+      <label for="tab_title">New Filename</label>
+        <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
+        <label for="tab_title">Open an Existing File</label>
+        <select class="selectFile" id="fileSelect"></select>
     </fieldset>
     </form>
     </article>

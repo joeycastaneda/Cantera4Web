@@ -89,6 +89,25 @@ select {
   background-color: transparent;
 }
 
+.selectFile {
+    -webkit-appearance: menulist;
+    border-left: 1px solid #ffd40c;
+  border-bottom: 1px solid #ffd40c;
+  border-right: 1px solid #ffd40c;
+  border-top: 1px solid #ffd40c;
+  cursor: pointer;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+  width: 75%;
+  height: 30px;
+  margin: 10px;
+  font-size: 10px;
+  color: #ffd40c;
+  background-color: transparent;
+}
+
 .close{
   -moz-appearance: none;
 		-webkit-appearance: none;
@@ -150,7 +169,7 @@ select {
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.restoreButton{
+.deleteButton{
     -moz-appearance: none;
 		-webkit-appearance: none;
 		-ms-appearance: none;
