@@ -100,7 +100,8 @@ $(document).ready(function() {
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="outputButton" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
+        var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
+        var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
         var plot = $('<button class="plotButton" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(deleteButton);
@@ -110,7 +111,8 @@ $(document).ready(function() {
         newTabPanelElement.append(header);
         newTabPanelElement.append(output);
         newTabPanelElement.append(outputButton);
-        newTabPanelElement.append(img);
+        newTabPanelElement.append(img1);
+        newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
         togglePlotBtn(0);
         }
@@ -136,7 +138,7 @@ var $form = $( "form", dialog ).submit(function() {
         //console.log(tabUniqueId);
 
         // create a navigation bar item for the new panel
-        var newTabNavElement = $('<li style="background-color:rgba(156,156,156,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
+        var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
 
         // add the new nav item to the DOM
         tabsUlElement.append(newTabNavElement);
@@ -189,7 +191,8 @@ var $form = $( "form", dialog ).submit(function() {
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
+        var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
+        var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
         var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
@@ -199,10 +202,12 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(header);
         newTabPanelElement.append(output);
         newTabPanelElement.append(outputButton);
-        newTabPanelElement.append(img);
+        newTabPanelElement.append(img1);
+        newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
         event.preventDefault();
-        $( this ).dialog( "close" );
+         $( this ).dialog( "close" );
+
     });
 
 $( "#add_tab" )
@@ -283,30 +288,55 @@ $( "#add_tab" )
             code: text,
             lang: lang
         }, function (data) {
-            var string = '#output' + tabUniqueId;
+
+            var string = 'textarea#output' + tabUniqueId;
             if(string.indexOf(".") != -1)
             {
                 string = string.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
+            }  
+            out = $(string);
+            out.val(data.output);
+            s1 = 'plot_img1_' +  tabUniqueId;
+            console.log(s1);
+            s2 = 'plot_img2_' +  tabUniqueId;
+             console.log(s2);
+            var plot_imgDiv1 = document.getElementById(s1);
+            var plot_imgDiv2 = document.getElementById(s2);
+            while (plot_imgDiv1.firstChild) {
+                plot_imgDiv1.removeChild(plot_imgDiv1.firstChild);
             }
-
-            console.log(string);
-           // console.log(data.output);
-            $(string).val(data.output);
-          //  console.log($(string).html());
-            s = 'plot_img' +  tabUniqueId;
-           // console.log(s);
-            var plot_imgDiv = document.getElementById(s);
-            while (plot_imgDiv.firstChild) {
-                plot_imgDiv.removeChild(plot_imgDiv.firstChild);
+            while (plot_imgDiv2.firstChild) {
+                plot_imgDiv2.removeChild(plot_imgDiv2.firstChild);
             }
-            if (data.plot === "T") {
+            if (data.plot === "T1") {
                 $.get('/tmp/userplt.png')
                     .done(function () {
                         var d = new Date();
                         togglePlotBtn(1);
                         var imgContent = document.createElement("IMG");
                         imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
-                        plot_imgDiv.appendChild(imgContent);
+                        plot_imgDiv1.appendChild(imgContent);
+
+                    });
+
+            }
+            else if (data.plot === "T12") {
+                $.get('/tmp/userplt.png')
+                    .done(function () {
+                        var d = new Date();
+                        togglePlotBtn(1);
+                        var imgContent = document.createElement("IMG");
+                        imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
+                        plot_imgDiv1.appendChild(imgContent);
+
+                    });
+                $.get('/tmp/userplt2.png')
+                    .done(function () {
+                        var d = new Date();
+                        togglePlotBtn(1);
+                        var imgContent = document.createElement("IMG");
+                        imgContent.setAttribute("src", '/tmp/userplt2.png?ver=' + d.getTime());
+                        plot_imgDiv2.appendChild(imgContent);
 
                     });
             }

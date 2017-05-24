@@ -5,7 +5,6 @@
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="static/js/jquery.js"></script>
-    <script src="static/js/execute.js"></script>
     <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
     <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" charset="utf-8"></script>
@@ -14,55 +13,21 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src ="static/js/editor3.js"></script>
 
-    <script>
-    $( function() {
-    var tabTitle = $( "#tab_title" ),
-      tabContent = $( "#tab_content" );
-
-    // Modal dialog init: custom buttons and a "close" callback resetting the form inside
-    var dialog = $( "#dialog" ).dialog({
-      autoOpen: false,
-      modal: true,
-      buttons: {
-        Add: function() {
-          addTab();
-          $( this ).dialog( "close" );
-        },
-        Cancel: function() {
-          $( this ).dialog( "close" );
-        }
-      },
-      close: function() {
-        form[ 0 ].reset();
-      }
-    });
-
-var form = dialog.find( "form" ).on( "submit", function( event ) {
-      addTab();
-      dialog.dialog( "close" );
-      event.preventDefault();
-    });
-
-$( "#add_tab" )
-    .button()
-    .on( "click", function() {
-    dialog.dialog( "open" );
-});
-} );
-
-</script>
-
 </head>
 
 <body>
 
-<h1>Cantera for Web</h1>
+<h1>Cantera for Web
+<footer id="footer">
+    <p class="copyright">&copy; UC Davis </p>
+</footer>
+</h1>
     <ul>
         <li><a class="active" href="/">Editor</a></li>
         <li><a href="/help">Help</a></li>
         <li><a href="/helpcpp">C++ Help</a></li>
         <li ><a href="/about">About</a></li>
-        <li style="float:right"> <a href="/login">Login</a> </li>
+        <li style="float:right"> <a href="/index">login</a> </li>
     </ul>
   <div align="left">
     <strong>Enter Cantera code (in Python or C++) below and press Execute.</strong><br>
@@ -71,29 +36,24 @@ $( "#add_tab" )
       <option value="Python">Python</option>
       <option value="C++">C++</option>
     </select>
+    <button style="background-color: transparent; hover:background rgba(255, 212, 12, 0.42);" class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
-    <div style="background-color: transparent; width: 96%; border: transparent; margin-top: 30px; margin-left: 10px;" id="tabs">
+     <article id="dialog" title="New Tab">
+    <form>
+    <fieldset class="ui-helper-reset">
+      <label for="tab_title">Title</label>
+      <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
+    </fieldset>
+    </form>
+    </article>
+
+    <div style="background-color: transparent; width: 96%; border: #ffd40c; margin-top: 30px; margin-left: 10px;" id="tabs">
     <ul>
     </ul>
     </div>
 
-    <button class="button" id="execButton">Execute</button>
-    <button class="button" id="restoreButton">Restore</button>
-    <button class="button" id="importButton">Import</button>
-    <button class="button" id="addTab">Add an editor</button>
-    <input type=file id="fileImport">
 
-    <h2>Output</h2>
-    <p class="p_editor">
-    <textarea id="output" placeholder="Output appears here" rows="15" ></textarea>
-   </p>
-    <button class="button" id="outputButton">
-        <a href="/output" download="output.txt">Get Output</a>
-    </button>
-   <div class="imgdiv" id="plot_img"> </div>
-    <button class="button" id="plotButton">
-        <a id='plotlink' href="/getplot" download="userplt.png">Get Plot</a>
-    </button>
+
 
 </body>
 </html>
