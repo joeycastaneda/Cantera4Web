@@ -11,8 +11,8 @@ from flask_login import login_user , logout_user , current_user , login_required
 
 app = Flask(__name__)
 app.secret_key = 'Thisissecret'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 engine = db.engine
@@ -72,15 +72,12 @@ def index():
         flash('Logged in successfully')
         return redirect(url_for('editor'))
     elif request.form['btn'] == 'register':
-        try:
-            user = User(request.form['username'], request.form['password'], request.form['email'], "")
+            user = User(request.form['username'], request.form['password'], request.form['email'], "","","")
             db.session.add(user)
             db.session.commit()
             flash('User successfully registered')
-            return redirect(url_for('index#login'))
-        except:
-            flash('Username or Email already exists')
-            return redirect(url_for('index'))
+            login_user(user)
+            return redirect(url_for('editor'))
     else:
         return redirect(url_for('index'))
 
@@ -125,6 +122,8 @@ def help():
 def execute():
     if(os.path.exists("/tmp/userplt.png")):
         os.remove("/tmp/userplt.png")
+    if (os.path.exists("/tmp/userplt2.png")):
+        os.remove("/tmp/userplt2.png")
     lang = request.args.get('lang', 0, type=str)
     plot = "F"
     output=""
@@ -132,7 +131,10 @@ def execute():
         code = request.args.get('code', 0, type=str)
         output = helpers.run_code(code)
         if(os.path.exists("/tmp/userplt.png")):
-            plot = "T"
+            plot = "T1"
+            if (os.path.exists("/tmp/userplt2.png")):
+                plot = "T12"
+        print(plot)
     else:
         code = request.args.get('code', 0, type=str)
         output = helpers.run_CPP(code)
@@ -295,8 +297,12 @@ def load_user(id):
     return User.query.get(int(id))
 
 @app.route('/tmp/userplt.png')
-def get_plot(): 
+def get_plot():
     return send_file('/tmp/userplt.png', mimetype='image/png')
+
+@app.route('/tmp/userplt2.png')
+def get_plot2():
+    return send_file('/tmp/userplt2.png', mimetype='image/png')
 
 @app.route('/example')
 def get_example_code():

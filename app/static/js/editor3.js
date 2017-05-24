@@ -75,7 +75,8 @@ $(document).ready(function() {
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="outputButton" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
+        var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
+        var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
         var plot = $('<button class="plotButton" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
@@ -85,7 +86,8 @@ $(document).ready(function() {
         newTabPanelElement.append(header);
         newTabPanelElement.append(output);
         newTabPanelElement.append(outputButton);
-        newTabPanelElement.append(img);
+        newTabPanelElement.append(img1);
+        newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
         $( this ).dialog( "close" );
         },
@@ -162,7 +164,8 @@ var $form = $( "form", dialog ).submit(function() {
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
         var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
-        var img = $('<div class="imgdiv" id="plot_img' + tabUniqueId + '"> </div>');
+        var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
+        var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
         var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
@@ -172,7 +175,8 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(header);
         newTabPanelElement.append(output);
         newTabPanelElement.append(outputButton);
-        newTabPanelElement.append(img);
+        newTabPanelElement.append(img1);
+        newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
         event.preventDefault();
          $( this ).dialog( "close" );
@@ -245,25 +249,48 @@ $( "#add_tab" )
             lang: lang
         }, function (data) {
             string = 'textarea#output' + tabUniqueId;
-            console.log(string);
             out = $(string);
-            console.log(out);
-            console.log(data.output);
             out.val(data.output);
-            s = 'plot_img' +  tabUniqueId;
-            console.log(s);
-            var plot_imgDiv = document.getElementById(s);
-            while (plot_imgDiv.firstChild) {
-                plot_imgDiv.removeChild(plot_imgDiv.firstChild);
+            s1 = 'plot_img1_' +  tabUniqueId;
+            console.log(s1);
+            s2 = 'plot_img2_' +  tabUniqueId;
+             console.log(s2);
+            var plot_imgDiv1 = document.getElementById(s1);
+            var plot_imgDiv2 = document.getElementById(s2);
+            while (plot_imgDiv1.firstChild) {
+                plot_imgDiv1.removeChild(plot_imgDiv1.firstChild);
             }
-            if (data.plot === "T") {
+            while (plot_imgDiv2.firstChild) {
+                plot_imgDiv2.removeChild(plot_imgDiv2.firstChild);
+            }
+            if (data.plot === "T1") {
                 $.get('/tmp/userplt.png')
                     .done(function () {
                         var d = new Date();
                         togglePlotBtn(1);
                         var imgContent = document.createElement("IMG");
                         imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
-                        plot_imgDiv.appendChild(imgContent);
+                        plot_imgDiv1.appendChild(imgContent);
+
+                    });
+            }
+            else if (data.plot === "T12") {
+                $.get('/tmp/userplt.png')
+                    .done(function () {
+                        var d = new Date();
+                        togglePlotBtn(1);
+                        var imgContent = document.createElement("IMG");
+                        imgContent.setAttribute("src", '/tmp/userplt.png?ver=' + d.getTime());
+                        plot_imgDiv1.appendChild(imgContent);
+
+                    });
+                $.get('/tmp/userplt2.png')
+                    .done(function () {
+                        var d = new Date();
+                        togglePlotBtn(1);
+                        var imgContent = document.createElement("IMG");
+                        imgContent.setAttribute("src", '/tmp/userplt2.png?ver=' + d.getTime());
+                        plot_imgDiv2.appendChild(imgContent);
 
                     });
             }
