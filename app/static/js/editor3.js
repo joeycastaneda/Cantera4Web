@@ -143,6 +143,7 @@ $(document).ready(function() {
     });
 
 var $form = $( "form", dialog ).submit(function() {
+        console.log(document.getElementById('dialog'));
         console.log(tabTitle.val());
         var tabsElement = $('#tabs');
         var tabsUlElement = tabsElement.find('ul');
@@ -209,9 +210,9 @@ var $form = $( "form", dialog ).submit(function() {
         var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
         var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
         var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
+
         newTabPanelElement.append(execButton);
         newTabPanelElement.append(restoreButton);
-        newTabPanelElement.append(importButton);
         newTabPanelElement.prepend(closeButton);
         newTabPanelElement.append(fileImport);
         newTabPanelElement.append(header);
@@ -220,9 +221,9 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(img1);
         newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
-        event.preventDefault();
-         $( this ).dialog( "close" );
 
+        event.preventDefault();
+        dialog.dialog("close");
     });
 
 $( "#add_tab" )
