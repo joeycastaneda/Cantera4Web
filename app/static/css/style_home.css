@@ -108,6 +108,9 @@ select {
   background-color: transparent;
 }
 
+select option{
+    background: #000000
+}
 .close{
   -moz-appearance: none;
 		-webkit-appearance: none;

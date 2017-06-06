@@ -25,17 +25,12 @@
     <ul>
         <li><a class="active" href="/">Editor</a></li>
         <li><a href="/help">Help</a></li>
-        <li><a href="/helpcpp">C++ Help</a></li>
         <li ><a href="/about">About</a></li>
         <li style="float:right"> <a href="/logout">Logout</a> </li>
     </ul>
   <div align="left">
-    <strong>Enter Cantera code (in Python or C++) below and press Execute.</strong><br>
+    <strong>Enter Cantera code (in Python) below and press Execute.</strong><br>
   </div>
-  <select class="lang" id="langSelect">
-      <option value="Python">Python</option>
-      <option value="C++">C++</option>
-    </select>
     <button style="background-color: transparent; hover:background rgba(255, 212, 12, 0.42);" class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
 
      <article id="dialog" title="New Editor">
@@ -45,6 +40,8 @@
         <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
         <label for="tab_title">Open an Existing File</label>
         <select class="selectFile" id="fileSelect"></select>
+        <label for="tab_title">Open an Example File</label>
+        <select class="selectFile" id="exampleSelect"></select>
     </fieldset>
     </form>
     </article>

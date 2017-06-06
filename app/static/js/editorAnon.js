@@ -15,25 +15,23 @@ $(document).ready(function() {
         Add: function() {
         if(numTabs() < 10)
         {
-          var selectedFile = $('#fileSelect').val();
-          var selectedExample = $('#exampleSelect').val();
+             var selected = $('#exampleSelect').val();
           var tabsElement = $('#tabs');
           var tabsUlElement = tabsElement.find('ul');
 
         // the panel id is a timestamp plus a random number from 0 to 10000
         //var tabUniqueId = Math.floor(Math.random()*10000);
         var tabUniqueId;
-        if(selectedFile != "No file chosen"){
-            tabUniqueId = selectedFile;
-            console.log(tabUniqueId);
-        }
-        else if (selectedExample != "No file chosen"){
-            tabUniqueId = selectedExample;
+        if(selected != "No file chosen"){
+            tabUniqueId = selected;
             console.log(tabUniqueId);
         }
         else{
             tabUniqueId = tabTitle.val();
         }
+
+        // the panel id is a timestamp plus a random number from 0 to 10000
+        //var tabUniqueId = Math.floor(Math.random()*10000);
 
         // create a navigation bar item for the new panel
         var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.62);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
@@ -51,8 +49,6 @@ $(document).ready(function() {
 
         var tabIndex = $('#tabs ul li').index($('#panel_nav_' + tabUniqueId));
 
-        console.log('tabIndex: ' + tabIndex);
-
         // activate the new panel
         tabsElement.tabs('option', 'active', tabIndex);
 
@@ -66,22 +62,12 @@ $(document).ready(function() {
         editor.setTheme("ace/theme/clouds_midnight");
         editor.getSession().setMode("ace/mode/python");
 
-        if(selectedFile != "No file chosen"){
-            $.getJSON('/getFilenames', {} ,function(data){
-                $(data.list).each(function(key, value){
-                    if(value === selectedFile)
-                    {
-                        editor.setValue(data.code[key], -1);
-                    }
-                });
-            });
-        }
-
-        else if(selectedExample != "No file chosen"){
+        if(selected != "No file chosen"){
             $.getJSON('/getExamples', {} ,function(data){
                 $(data.list).each(function(key, value){
-                    if(value === selectedExample)
+                    if(value === selected)
                     {
+                       // console.log("FOUND FILE");
                         editor.setValue(data.code[key], -1);
                     }
                 });
@@ -143,14 +129,11 @@ $(document).ready(function() {
     });
 
 var $form = $( "form", dialog ).submit(function() {
-        console.log(tabTitle.val());
         var tabsElement = $('#tabs');
         var tabsUlElement = tabsElement.find('ul');
 
         // the panel id is a timestamp plus a random number from 0 to 10000
-        //var tabUniqueId = Math.floor(Math.random()*10000);
         var tabUniqueId = tabTitle.val();
-        //console.log(tabUniqueId);
 
         // create a navigation bar item for the new panel
         var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
@@ -167,8 +150,6 @@ var $form = $( "form", dialog ).submit(function() {
         tabsElement.tabs('refresh');
 
         var tabIndex = $('#tabs ul li').index($('#panel_nav_' + tabUniqueId));
-
-        console.log('tabIndex: ' + tabIndex);
 
         // activate the new panel
         tabsElement.tabs('option', 'active', tabIndex);
@@ -234,9 +215,6 @@ $( "#add_tab" )
 
     $('#tabs').on('click', '.close', function () {
 
-        console.log('close a tab and destroy the ace editor instance');
-
-        //console.log($(this).parent());
 
         var tabUniqueId = $(this).parent().attr('data-tab-id');
         if(tabUniqueId.indexOf(".") != -1)
@@ -245,16 +223,14 @@ $( "#add_tab" )
         }
 
         var resultArray = $.grep(editors, function (n, i) {
-           // console.log("n.id: " + n.id + " unique: " + tabUniqueId);
             if(n.id === tabUniqueId)
             {
-               // console.log("FOUND MATCH");
                 return true;
             }
         });
 
         var editor = resultArray[0].instance;
-        //console.log(editor);
+
         // destroy the editor instance
         editor.destroy();
 
@@ -284,8 +260,6 @@ $( "#add_tab" )
     $('#tabs').on('click', '.execButton', function () {
         var tabUniqueId = $(this).parent().attr('data-tab-id');
 
-        console.log(tabUniqueId);
-
         var cleanID = tabUniqueId;
         if(cleanID.indexOf(".") != -1)
         {
@@ -296,9 +270,8 @@ $( "#add_tab" )
             return n.id === cleanID;
         });
         var editor = resultArray[0].instance;
-       // console.log(editor);
         var text = editor.getValue();
-        var lang = $("#langSelect>option:selected").html()
+
         $.getJSON('/execute', {
             code: text,
             lang: "Python"
@@ -312,9 +285,7 @@ $( "#add_tab" )
             out = $(string);
             out.val(data.output);
             s1 = 'plot_img1_' +  tabUniqueId;
-            console.log(s1);
             s2 = 'plot_img2_' +  tabUniqueId;
-             console.log(s2);
             var plot_imgDiv1 = document.getElementById(s1);
             var plot_imgDiv2 = document.getElementById(s2);
             while (plot_imgDiv1.firstChild) {
@@ -365,7 +336,6 @@ $( "#add_tab" )
 
     $(function () {
         $("#output").change(function () {
-            console.log("saving output...");
             var output = $('#output').val();
             $.getJSON('/makeoutput', {
                 output: output
@@ -388,16 +358,13 @@ $( "#add_tab" )
             }
 
             var resultArray = $.grep(editors, function (n, i) {
-               // console.log("n.id: " + n.id + " unique: " + tabUniqueId);
                 if(n.id === tabUniqueId)
                 {
-                   // console.log("FOUND MATCH");
                     return true;
                 }
             });
 
             var editor = resultArray[0].instance;
-            //console.log(editor);
             // destroy the editor instance
             editor.destroy();
 
@@ -405,7 +372,6 @@ $( "#add_tab" )
             $('#tabs').find('#panel_nav_' + tabUniqueId).remove();
             $('#tabs').find('#panel_' + tabUniqueId).remove();
                 updateFileSelect();
-                updateExampleSelect();
         });
             return false;
     });
@@ -415,7 +381,6 @@ $( "#add_tab" )
         var x = document.getElementById("fileImport");
         var tabUniqueId = $(this).parent().attr('data-tab-id');
 
-        console.log(tabUniqueId);
         var cleanID = tabUniqueId;
         if(cleanID.indexOf(".") != -1)
         {
@@ -441,75 +406,6 @@ $( "#add_tab" )
         return false;
     });
 
-    $(function () {
-        $('select#langSelect').change(function () {
-            var tabUniqueId = $(this).parent().attr('data-tab-id');
-
-            console.log(tabUniqueId);
-
-            var cleanID = tabUniqueId;
-            if(cleanID.indexOf(".") != -1)
-            {
-                cleanID = cleanID.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
-            }
-
-            var resultArray = $.grep(editors, function (n, i) {
-                return n.id === cleanID;
-            });
-
-
-            var editor = resultArray[0].instance;
-            var lang = $("#langSelect>option:selected").html()
-            if (lang == "Python") {
-                editor.getSession().setMode("ace/mode/python");
-            }
-            else {
-                editor.getSession().setMode("ace/mode/c_cpp");
-            }
-        })
-    });
-
-    timeout_id = null;
-    $(function () {
-        $(document).keypress(function () {
-       // console.log("Count: " + numTabs());
-            if (timeout_id) {
-                timeout_id = clearTimeout(timeout_id);
-            }
-            timeout_id = setTimeout(function () {
-
-                console.log("autosaving...");
-                updateFileSelect();
-                updateExampleSelect();
-                var tabUniqueId = $('.ui-state-active > a').text();
-                if(typeof tabUniqueId !== "undefined" ){
-                //console.log(tabUniqueId);
-
-                var cleanID = tabUniqueId;
-                if(cleanID.indexOf(".") != -1)
-                {
-                    cleanID = cleanID.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
-                }
-
-                var resultArray = $.grep(editors, function (n, i) {
-                    return n.id === cleanID;
-                });
-
-
-                var editor = resultArray[0].instance;
-                var text = editor.getValue();
-                $.getJSON('/saveFile', {
-                    code: text,
-                    filename: tabUniqueId
-                }, function (data) {
-                });
-                }
-                return false;
-            }, 750);
-        });
-    });
-
-    updateFileSelect();
     updateExampleSelect();
 
 });
@@ -522,21 +418,6 @@ function numTabs(){
     return count;
 }
 
-function updateFileSelect(){
-    var selector = $('#fileSelect');
-    selector.empty();
-    selector.append($('<option/>', {value: "No file chosen", text: "No file chosen"}));
-    $.getJSON('/getFilenames', {} ,function(data){
-        $(data.list).each(function(key, value){
-            if(value != "")
-            {
-                //console.log("Value: " + value);
-                selector.append($('<option/>', {value: value, text: value}));
-            }
-        });
-    });
-}
-
 function updateExampleSelect(){
     var selector = $('#exampleSelect');
     selector.empty();
@@ -545,7 +426,7 @@ function updateExampleSelect(){
         $(data.list).each(function(key, value){
             if(value != "")
             {
-                //console.log("Value: " + value);
+                console.log("Value: " + value);
                 selector.append($('<option/>', {value: value, text: value}));
             }
         });

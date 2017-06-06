@@ -12,8 +12,8 @@ from flask_mail import Mail, Message
 
 app = Flask(__name__)
 app.secret_key = 'Thisissecret'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://Canteraforweb:Canteraforweb@cantera.cbe2dj9ba1cm.us-west-2.rds.amazonaws.com:5432/postgres'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://localhost/postgres'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 engine = db.engine
@@ -69,7 +69,6 @@ db.session.commit()
 def index():
     if request.method == 'GET':
         return render_template('index.html')
-   # print request.form['btn']
     if request.form['btn'] == 'login':
         username = request.form['username']
         password = request.form['password']
@@ -89,7 +88,6 @@ def index():
             db.session.add(user)
             db.session.commit()
             flash('User successfully registered')
-           # print "USER CREATED"
             return render_template('user/editor3.html')
         except:
             flash('Username or Email already exists')
@@ -203,7 +201,6 @@ def numFiles():
 
 @app.route('/saveFile')
 def saveFile():
-   # print "numFiles: " + str(numFiles())
     code = request.args.get('code', 0, type=str)
     filename = request.args.get('filename', 0, type=str)
     if current_user.is_authenticated:
@@ -212,11 +209,8 @@ def saveFile():
             newArr = user.savearr[:]
             newArr[user.namearr.index(filename)] = code
             user.savearr = newArr
-           # print user.savearr
             db.session.commit()
-           # print "tmp/" + filename
             if (os.path.exists("/tmp/" + filename)):
-             #   print "Found file"
                 with open("/tmp/" + filename, "w") as file:
                     file.write(code)
                     file.close()
@@ -226,13 +220,11 @@ def saveFile():
             newNameArr = user.namearr[:]
             for index, name in enumerate(newNameArr):
                 if (name == ""):
+                    print "SAVING"
                     newNameArr[index] = filename
-                    #print "tmp/" + filename
                     newSaveArr[index] = code
-                  #  print newNameArr
                     user.savearr = newSaveArr
                     user.namearr = newNameArr
-                  #  print user.namearr
                     db.session.commit()
                     with open("/tmp/" + filename, "w") as file:
                         file.write("")
@@ -241,30 +233,10 @@ def saveFile():
 
     return (''), 204
 
-@app.route('/createFile')
-def createFile():
-    filename = request.args.get('filename', 0, type=str)
-    if current_user.is_authenticated:
-        user = db.session.query(User).filter_by(username=current_user.username).first()
-        newSaveArr = user.savearr[:]
-        newNameArr = user.namearr
-        for name in newNameArr:
-            if(name == ""):
-                newNameArr[0] = filename
-                #newSaveArr[newNameArr.index(filename)] = ""
-                user.savearr = newSaveArr
-                user.namearr = newNameArr
-                db.session.commit()
-                with open("/tmp/" + filename, "w") as file:
-                    file.write("")
-                    file.close()
-                    return (''), 204
-        return (''), 405
 
 @app.route('/deleteFile')
 def deleteFile():
     filename = request.args.get('filename', 0, type=str)
-    #print current_user.namearr
     if current_user.is_authenticated:
         if(filename in current_user.namearr):
             user = db.session.query(User).filter_by(username=current_user.username).first()
@@ -274,19 +246,23 @@ def deleteFile():
             newNameArr[user.namearr.index(filename)] = ""
             user.namearr = newNameArr
             user.savearr = newSaveArr
-            db.session.commit();
+            db.session.commit()
             if (os.path.exists("/tmp/" + filename)):
                 os.remove("/tmp/" + filename)
     return (''), 204
 
-@app.route('/getFilenames')
-def filenames():
-
-    if current_user.is_authenticated:
-        user = db.session.query(User).filter_by(username=current_user.username).first()
-        return jsonify(list = user.namearr, code = user.savearr)
-    else:
-        return (''), 404
+@app.route('/getExamples')
+def examples():
+    namearr = []
+    codearr = []
+    files = [f for f in os.listdir("./examples") if f.endswith(".py")]
+    for f in files:
+        print f
+        namearr.append(f)
+        with open("./examples/" + f, 'r') as file:
+            codearr.append(file.read())
+            file.close()
+    return jsonify(list = namearr, code = codearr)
 
 @app.route('/restore')
 def restore():
@@ -369,6 +345,15 @@ def make_output():
 @app.route('/output')
 def get_output():
     return send_file("tmp/output.txt", mimetype='text/plain')
+
+@app.route('/getFilenames')
+def filenames():
+
+    if current_user.is_authenticated:
+        user = db.session.query(User).filter_by(username=current_user.username).first()
+        return jsonify(list = user.namearr, code = user.savearr)
+    else:
+        return (''), 404
 
 @app.route('/getplot')
 def dl_plot():
