@@ -1,0 +1,123 @@
+<!DOCTYPE HTML>
+<!--
+	Dimension by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Cantera For Web</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/css/main.css" />
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<div class="content">
+							<div class="inner">
+								<h1>Project Wizard</h1>
+							</div>
+						</div>
+						<nav>
+							<ul>
+								<li><a href="#login">New Project</a></li>
+								<li><a href="#register">Open Existing Project</a></li>
+								<li><a href="#register">Sample Scripts</a></li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+							<article id="login">
+								<h2 class="major">Login</h2>
+								<div>
+									<form action="" method=post class="form">
+									<h2>Sign in to Your Account </h2>
+									<div class="control-group">
+										<div class="controls">
+										  <input type="text" id="username" name="username" class="input-xlarge"
+											placeholder="Enter Username" required>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<div class="controls">
+										  <input type="password" id="password" name="password" class="input-xlarge"
+											placeholder="Enter Password" required>
+										</div>
+									</div>
+
+									<div class="control-group">
+										<div class="controls">
+										  <button type="submit" class="btn btn-success">Sign in</button>
+										</div>
+									</div>
+									<div><br>
+									<h2>Not registered yet?</h2>
+									  <input type="button" class="button register" onclick="location.href='/index#register';" value="Register" />
+									</div>
+									</form>
+									</div>
+							</article>
+
+							<article id="register">
+								<h2 class="major">Register</h2>
+								<form action="" method=post class="form">
+								<h2>Create an Account </h2>
+
+								  <div class="control-group">
+									<div class="controls">
+									  <input type="text" id="username" name="username" class="input-xlarge"
+										placeholder="Enter Username" value="{{ request.form.username }}"
+										required>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<div class="controls">
+									  <input type="password" id="password" name="password" class="input-xlarge"
+										placeholder="Enter Password" value="{{ request.form.password }}"
+										required>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<div class="controls">
+									  <input type="email" id="email" name="email" class="input-xlarge"
+										placeholder="Enter Email" value="{{ request.form.username }}"
+										required>
+									</div>
+								</div>
+
+								<div class="control-group">
+									<div class="controls">
+									  <button type="submit" class="btn btn-success">Sign up</button>
+									</div>
+							</article>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright">&copy; UC Davis </p>
+					</footer>
+
+			</div>
+
+			<div id="bg"></div>
+
+		<!-- Scripts -->
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/skel.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+
+	</body>
+</html>

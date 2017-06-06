@@ -1,0 +1,58 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script src="static/js/jquery.js"></script>
+    <script src="static/js/ace-min/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="http://cdn.jquerytools.org/1.2.7/full/jquery.tools.min.js" charset="utf-8"></script>
+    <script src="http://ajaxorg.github.io/ace-builds/src/ace.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="static/css/style_home.css?ver=29">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src ="static/js/editor3.js"></script>
+
+</head>
+
+<body>
+
+<h1>Cantera for Web
+<footer id="footer">
+    <p class="copyright">&copy; UC Davis </p>
+</footer>
+</h1>
+    <ul>
+        <li><a class="active" href="/">Editor</a></li>
+        <li><a href="/help">Help</a></li>
+        <li ><a href="/about">About</a></li>
+        <li style="float:right"> <a href="/logout">Logout</a> </li>
+    </ul>
+  <div align="left">
+    <strong>Enter Cantera code (in Python) below and press Execute.</strong><br>
+  </div>
+    <button style="background-color: transparent; hover:background rgba(255, 212, 12, 0.42);" class="button" id="add_tab" style="color: #ffd40c; font-weight: 1000px;" >Add an editor</button>
+
+     <article id="dialog" title="New Editor">
+    <form>
+    <fieldset class="ui-helper-reset">
+      <label for="tab_title">New Filename</label>
+        <input type="text" name="tab_title" id="tab_title" class="ui-widget-content ui-corner-all">
+        <label for="tab_title">Open an Existing File</label>
+        <select class="selectFile" id="fileSelect"></select>
+        <label for="tab_title">Open an Example File</label>
+        <select class="selectFile" id="exampleSelect"></select>
+    </fieldset>
+    </form>
+    </article>
+
+    <div style="background-color: transparent; width: 96%; border: #ffd40c; margin-top: 30px; margin-left: 10px;" id="tabs">
+    <ul>
+    </ul>
+    </div>
+
+
+
+
+</body>
+</html>
