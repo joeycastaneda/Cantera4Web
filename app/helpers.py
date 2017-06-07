@@ -39,7 +39,7 @@ def run_code(code):
             output = "Timeout(Infinite loop or program takes too much server time)"
         else:
             output = ""
-    output = (output[:10000] + '..') if len(output) > 10000 else output
+    #output = (output[:10000] + '..') if len(output) > 10000 else output
     return output
 
 def run_CPP(code):
