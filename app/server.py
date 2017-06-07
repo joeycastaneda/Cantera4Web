@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import sys, helpers, os
+import sys, helpers, os, string, random
 from flask import Flask, render_template, request, jsonify, session, flash, url_for, redirect, abort, g, send_file, Response
 #from User import User
 from flask_sqlalchemy import SQLAlchemy
@@ -64,6 +64,9 @@ class User(db.Model):
 
 db.create_all()
 db.session.commit()
+
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))
 
 @app.route('/index',methods=['GET','POST'])
 def index():
@@ -139,6 +142,9 @@ def forget():
         return render_template('forget.html')
     username = request.form['username']
     registered_user = User.query.filter_by(username=username).first()
+    newpw = id_generator()
+    registered_user.password = newpw
+    db.session.commit()
     if registered_user is None:
         flash('Username is invalid', 'error')
         return redirect(url_for('forget'))
@@ -146,7 +152,29 @@ def forget():
         msg = Message('Hello', sender='cantera4web@gmail.com', recipients=[registered_user.email])
         msg.body = "Your password is "+ registered_user.password
         mail.send(msg)
-        return "Your password has been sent. Hit the back button to return to the website."    
+        #return "Your password has been sent. Hit the back button to return to the website."
+        return redirect(url_for('reset'))    
+
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    if request.method == 'GET':
+        return render_template('reset.html')
+    username = request.form['username']
+    password = request.form['password']
+    newpass = request.form['new password']
+    registered_user = User.query.filter_by(username=username,password=password).first()
+    registered_user.password = newpass
+    print(registered_user.username)
+    print(registered_user.password)
+    db.session.commit()
+    if registered_user is None:
+        flash('Username is invalid', 'error')
+        return redirect(url_for('reset'))
+    if registered_user.is_authenticated:
+        msg = Message('Hello', sender='cantera4web@gmail.com', recipients=[registered_user.email])
+        msg.body = "You have successfully reset your password. Refresh CanteraForWeb page and log back in"
+        mail.send(msg)
+        return "Your password has been reset. Hit the back button to return to the website."
 
 @app.route('/execute',methods=['GET','POST'])
 def execute():
