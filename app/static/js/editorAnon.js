@@ -24,7 +24,6 @@ $(document).ready(function() {
         var tabUniqueId;
         if(selected != "No file chosen"){
             tabUniqueId = selected;
-            console.log(tabUniqueId);
         }
         else{
             tabUniqueId = tabTitle.val();
@@ -67,7 +66,6 @@ $(document).ready(function() {
                 $(data.list).each(function(key, value){
                     if(value === selected)
                     {
-                       // console.log("FOUND FILE");
                         editor.setValue(data.code[key], -1);
                     }
                 });
@@ -129,14 +127,27 @@ $(document).ready(function() {
     });
 
 var $form = $( "form", dialog ).submit(function() {
-        var tabsElement = $('#tabs');
-        var tabsUlElement = tabsElement.find('ul');
+        if(numTabs() < 10)
+        {
+             var selected = $('#exampleSelect').val();
+          var tabsElement = $('#tabs');
+          var tabsUlElement = tabsElement.find('ul');
 
         // the panel id is a timestamp plus a random number from 0 to 10000
-        var tabUniqueId = tabTitle.val();
+        //var tabUniqueId = Math.floor(Math.random()*10000);
+        var tabUniqueId;
+        if(selected != "No file chosen"){
+            tabUniqueId = selected;
+        }
+        else{
+            tabUniqueId = tabTitle.val();
+        }
+
+        // the panel id is a timestamp plus a random number from 0 to 10000
+        //var tabUniqueId = Math.floor(Math.random()*10000);
 
         // create a navigation bar item for the new panel
-        var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.99);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
+        var newTabNavElement = $('<li style="background-color:rgba(255,212,12,0.62);" + id="panel_nav_' + tabUniqueId + '"><a href="#panel_' + tabUniqueId + '">' + tabUniqueId + '</a></li>');
 
         // add the new nav item to the DOM
         tabsUlElement.append(newTabNavElement);
@@ -164,6 +175,17 @@ var $form = $( "form", dialog ).submit(function() {
         editor.setTheme("ace/theme/clouds_midnight");
         editor.getSession().setMode("ace/mode/python");
 
+        if(selected != "No file chosen"){
+            $.getJSON('/getExamples', {} ,function(data){
+                $(data.list).each(function(key, value){
+                    if(value === selected)
+                    {
+                        editor.setValue(data.code[key], -1);
+                    }
+                });
+            });
+        }
+
         // set the size of the panel
         newTabPanelElement.width('98%');
         newTabPanelElement.height('450');
@@ -174,24 +196,28 @@ var $form = $( "form", dialog ).submit(function() {
 
         // resize the editor
         editor.resize();
-
-        editors.push({id: tabUniqueId, instance: editor});
+        var cleanID = tabUniqueId;
+        if(cleanID.indexOf(".") != -1)
+        {
+           cleanID = cleanID.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
+        }
+        editors.push({id: cleanID, instance: editor});
 
         // add an editor/panel close button to the panel dom
         var closeButton = $('<button class="close">close</button>');
 
         var execButton = $('<button class="execButton" id="execButton">Execute</button>');
-        var restoreButton = $('<button class="restoreButton" id="restoreButton">Restore</button>');
         var deleteButton = $('<button class="deleteButton" id="deleteButton" >Delete</button>');
+        var importButton = $('<button class="importButton" id="importButton" >Import</button>');
         var fileImport = $('<input style="color: #ffd40c;" type=file id="fileImport">');
         var header = $('<h2 style="color: #ffd40c;">Output</h2>');
         var output = $('<p class="p_editor"> <textarea id=' + '"output' + tabUniqueId + '" placeholder="Output appears here" rows="15" ></textarea> </p>');
-        var outputButton = $('<button style="color: #ffd40c;" class="button" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
+        var outputButton = $('<button style="color: #ffd40c;" class="outputButton" id="outputButton"> <a style="color: #ffd40c;" href="/output" download="output.txt">Get Output</a> </button>');
         var img1 = $('<div class="imgdiv" id="plot_img1_' + tabUniqueId + '"> </div>');
         var img2 = $('<div class="imgdiv" id="plot_img2_' + tabUniqueId + '"> </div>');
-        var plot = $('<button class="button" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
+        var plot = $('<button class="plotButton" id="plotButton" style="color: #ffd40c;" > <a style="color: #ffd40c;" id="plotlink" href="/getplot" download="userplt.png">Get Plot</a> </button>');
         newTabPanelElement.append(execButton);
-        newTabPanelElement.append(restoreButton);
+        newTabPanelElement.append(deleteButton);
         newTabPanelElement.append(importButton);
         newTabPanelElement.prepend(closeButton);
         newTabPanelElement.append(fileImport);
@@ -201,8 +227,10 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(img1);
         newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
+        togglePlotBtn(0);
+        }
         event.preventDefault();
-         $( this ).dialog( "close" );
+         dialog.dialog( "close" );
 
     });
 
@@ -426,7 +454,6 @@ function updateExampleSelect(){
         $(data.list).each(function(key, value){
             if(value != "")
             {
-                console.log("Value: " + value);
                 selector.append($('<option/>', {value: value, text: value}));
             }
         });
