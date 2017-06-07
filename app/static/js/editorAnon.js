@@ -228,9 +228,10 @@ var $form = $( "form", dialog ).submit(function() {
         newTabPanelElement.append(img2);
         newTabPanelElement.append(plot);
         togglePlotBtn(0);
-        }
+
         event.preventDefault();
          dialog.dialog( "close" );
+         }
 
     });
 
