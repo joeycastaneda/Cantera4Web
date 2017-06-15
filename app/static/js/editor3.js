@@ -317,12 +317,24 @@ $( "#add_tab" )
             cleanID = cleanID.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
         }
 
+        var textArea = $('textarea#output' + cleanID);
+        textArea.val("Retrieving Output...");
+
         var resultArray = $.grep(editors, function (n, i) {
             return n.id === cleanID;
         });
         var editor = resultArray[0].instance;
         var text = editor.getValue();
-        var lang = $("#langSelect>option:selected").html()
+        var lang = $("#langSelect>option:selected").html();
+
+        var newID = tabUniqueId;
+        if(newID.indexOf(".") != -1)
+        {
+            newID = newID.replace( /(:|\.|\[|\]|,)/g, "\\\\$1" );
+        }
+        var execButton = $($("[id='panel_" + tabUniqueId +"' ]").children("#execButton")[0]);
+        execButton.toggleClass("execButton execButtonDisabled");
+        execButton.prop('disabled', true);
         $.getJSON('/execute', {
             code: text,
             lang: "Python"
@@ -380,6 +392,8 @@ $( "#add_tab" )
             else if (data.plot === "F") {
                 togglePlotBtn(0);
             }
+            execButton.prop('disabled', false);
+            execButton.toggleClass("execButton execButtonDisabled");
         });
 
         return false;
@@ -430,8 +444,9 @@ $( "#add_tab" )
 
 
     $('#tabs').on('click', '.importButton', function () {
-        var x = document.getElementById("fileImport");
         var tabUniqueId = $(this).parent().attr('data-tab-id');
+        var parent = document.getElementById("panel_" + tabUniqueId);
+        var x = parent.querySelector("#fileImport");
 
         var cleanID = tabUniqueId;
         if(cleanID.indexOf(".") != -1)
@@ -451,7 +466,7 @@ $( "#add_tab" )
             var reader = new FileReader();
             reader.onload = function (event) {
                 var contents = event.target.result;
-                editor.setValue(contents, 1);
+                editor.setValue(contents, -1);
             };
             reader.readAsText(file);
         }
@@ -523,6 +538,45 @@ $( "#add_tab" )
 
     updateFileSelect();
     updateExampleSelect();
+
+function checkNewTabName(){
+        var returnBool = true;
+      var selectedFile = $('#fileSelect').val();
+      var selectedExample = $('#exampleSelect').val();
+      var tabsElement = $('#tabs');
+      var tabsUlElement = tabsElement.find('ul');
+
+       // the panel id is a timestamp plus a random number from 0 to 10000
+       //var tabUniqueId = Math.floor(Math.random()*10000);
+       if(selectedFile != "No file chosen"){
+        $.getJSON('/getFilenames', {} ,function(data){
+            $(data.list).each(function(key, value){
+            for(i = 0; i < editors.length; i++)
+            {
+                var str = editors[i].id;
+                var cleanID = str;
+                if(cleanID.indexOf("\\") != -1)
+                {
+                    cleanID = cleanID.replace( /\\/g, "" );
+                }
+               // console.log("save file: " + value + " editor id: " +  cleanID);
+                if(value == cleanID)
+                {
+                   // console.log("FOUND MATCH");
+                   // returnBool = false;
+                }
+            }
+            });
+        });
+       }
+       else if (selectedExample != "No file chosen"){
+       }
+       else{
+       }
+
+
+        return returnBool;
+}
 
 });
 
