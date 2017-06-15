@@ -59,7 +59,7 @@ $(document).ready(function() {
 
         // initialize the editor in the tab
         var editor = ace.edit('editor_' + tabUniqueId);
-        editor.setTheme("ace/theme/clouds_midnight");
+        editor.setTheme("ace/theme/tomorrow_night_bright");
         editor.getSession().setMode("ace/mode/python");
 
         if(selectedFile != "No file chosen"){
@@ -185,7 +185,7 @@ var $form = $( "form", dialog ).submit(function() {
 
         // initialize the editor in the tab
         var editor = ace.edit('editor_' + tabUniqueId);
-        editor.setTheme("ace/theme/clouds_midnight");
+        editor.setTheme("ace/theme/tomorrow_night_bright");
         editor.getSession().setMode("ace/mode/python");
 
         if(selectedFile != "No file chosen"){
