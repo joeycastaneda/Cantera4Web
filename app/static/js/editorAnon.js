@@ -421,8 +421,9 @@ $( "#add_tab" )
 
 
     $('#tabs').on('click', '.importButton', function () {
-        var x = document.getElementById("fileImport");
         var tabUniqueId = $(this).parent().attr('data-tab-id');
+        var parent = document.getElementById("panel_" + tabUniqueId);
+        var x = parent.querySelector("#fileImport");
 
         var cleanID = tabUniqueId;
         if(cleanID.indexOf(".") != -1)
@@ -442,7 +443,7 @@ $( "#add_tab" )
             var reader = new FileReader();
             reader.onload = function (event) {
                 var contents = event.target.result;
-                editor.setValue(contents, 1);
+                editor.setValue(contents, -1);
             };
             reader.readAsText(file);
         }
