@@ -539,6 +539,45 @@ $( "#add_tab" )
     updateFileSelect();
     updateExampleSelect();
 
+function checkNewTabName(){
+        var returnBool = true;
+      var selectedFile = $('#fileSelect').val();
+      var selectedExample = $('#exampleSelect').val();
+      var tabsElement = $('#tabs');
+      var tabsUlElement = tabsElement.find('ul');
+
+       // the panel id is a timestamp plus a random number from 0 to 10000
+       //var tabUniqueId = Math.floor(Math.random()*10000);
+       if(selectedFile != "No file chosen"){
+        $.getJSON('/getFilenames', {} ,function(data){
+            $(data.list).each(function(key, value){
+            for(i = 0; i < editors.length; i++)
+            {
+                var str = editors[i].id;
+                var cleanID = str;
+                if(cleanID.indexOf("\\") != -1)
+                {
+                    cleanID = cleanID.replace( /\\/g, "" );
+                }
+               // console.log("save file: " + value + " editor id: " +  cleanID);
+                if(value == cleanID)
+                {
+                   // console.log("FOUND MATCH");
+                   // returnBool = false;
+                }
+            }
+            });
+        });
+       }
+       else if (selectedExample != "No file chosen"){
+       }
+       else{
+       }
+
+
+        return returnBool;
+}
+
 });
 
 function numTabs(){
