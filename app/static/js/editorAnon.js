@@ -295,11 +295,23 @@ $( "#add_tab" )
             cleanID = cleanID.replace( /(:|\.|\[|\]|,)/g, "\\$1" );
         }
 
+        var textArea = $('textarea#output' + cleanID);
+        textArea.val("Retrieving Output...");
+
         var resultArray = $.grep(editors, function (n, i) {
             return n.id === cleanID;
         });
         var editor = resultArray[0].instance;
         var text = editor.getValue();
+
+        var newID = tabUniqueId;
+        if(newID.indexOf(".") != -1)
+        {
+            newID = newID.replace( /(:|\.|\[|\]|,)/g, "\\\\$1" );
+        }
+        var execButton = $($("[id='panel_" + tabUniqueId +"' ]").children("#execButton")[0]);
+        execButton.toggleClass("execButton execButtonDisabled");
+        execButton.prop('disabled', true);
 
         $.getJSON('/execute', {
             code: text,
@@ -358,6 +370,8 @@ $( "#add_tab" )
             else if (data.plot === "F") {
                 togglePlotBtn(0);
             }
+            execButton.prop('disabled', false);
+            execButton.toggleClass("execButton execButtonDisabled");
         });
 
         return false;
@@ -407,8 +421,9 @@ $( "#add_tab" )
 
 
     $('#tabs').on('click', '.importButton', function () {
-        var x = document.getElementById("fileImport");
         var tabUniqueId = $(this).parent().attr('data-tab-id');
+        var parent = document.getElementById("panel_" + tabUniqueId);
+        var x = parent.querySelector("#fileImport");
 
         var cleanID = tabUniqueId;
         if(cleanID.indexOf(".") != -1)
@@ -428,7 +443,7 @@ $( "#add_tab" )
             var reader = new FileReader();
             reader.onload = function (event) {
                 var contents = event.target.result;
-                editor.setValue(contents, 1);
+                editor.setValue(contents, -1);
             };
             reader.readAsText(file);
         }
